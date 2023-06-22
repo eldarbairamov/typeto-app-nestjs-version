@@ -1,0 +1,1 @@
+export type EmailActionType = "registration" | "forgot password"
