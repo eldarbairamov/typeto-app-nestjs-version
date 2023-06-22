@@ -18,14 +18,6 @@ export function ContactsMenu( { isOnlyMessage, onModalClose }: { isOnlyMessage?:
 
    const { MAIN_COLOR, PLACEHOLDER_COLOR, ICON_COLOR, FONT_COLOR } = useColorValues();
 
-   if ( isLoading ) {
-      return (
-          <Center h={ 500 }>
-             <Spinner size={ "lg" } thickness={ "3px" } color={ MAIN_COLOR }/>
-          </Center>
-      );
-   }
-
    return (
        <VStack h={ 500 }>
 

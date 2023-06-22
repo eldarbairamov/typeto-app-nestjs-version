@@ -5,8 +5,8 @@ export const findUserService = ( value: string ) => {
    const dispatch = useAppDispatch();
 
    const findUser = async () => {
-      if (value !== "") {
-         await dispatch(userAsyncActions.findUser({ userEmail: value }));
+      if ( value !== "" ) {
+         await dispatch( userAsyncActions.findUser( { userEmail: value } ) );
       }
    };
 

@@ -8,9 +8,9 @@ import { avatarService } from "../../service";
 import { useColorValues } from "../../constant";
 
 export function ProfileInfo() {
-   const { currentUserInfo } = useAppSelector(state => state.userReducer);
+   const { currentUserInfo } = useAppSelector( state => state.userReducer );
 
-   const ref = useRef<HTMLInputElement>(null);
+   const ref = useRef<HTMLInputElement>( null );
 
    const handlePick = () => ref.current?.click();
 
@@ -26,7 +26,7 @@ export function ProfileInfo() {
                       as={ IconButton }
                       mr={ 5 }
                       aria-label={ "Options" }
-                      icon={ CgProfile({ color: MAIN_COLOR, size: 29 }) }/>
+                      icon={ CgProfile( { color: MAIN_COLOR, size: 29 } ) }/>
 
           <MenuList rounded={ 20 }
                     bg={ BG_SECOND }
@@ -42,7 +42,7 @@ export function ProfileInfo() {
                    <Avatar name={ currentUserInfo.username }
                            showBorder={ true }
                            borderColor={ AVATAR_BORDER }
-                           src={ getImageUrl(currentUserInfo.image, currentUserInfo.email) }
+                           src={ getImageUrl( currentUserInfo.image, currentUserInfo.email ) }
                            size={ "2xl" }/>
 
                    <Text fontWeight={ "black" }
@@ -71,7 +71,7 @@ export function ProfileInfo() {
                                _hover={ { bg: MAIN_COLOR, color: WHITE_COLOR } }
                                onClick={ deleteAvatar }
                                fontWeight={ "normal" }>
-                         Видалити
+                           Видалити
                        </Button>
                    }
 

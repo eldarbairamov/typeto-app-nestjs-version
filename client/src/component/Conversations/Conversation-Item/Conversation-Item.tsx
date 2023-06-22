@@ -15,21 +15,21 @@ interface IConversationProps {
    user?: IUserFromConversation;
 }
 
-export const ConversationItem = forwardRef(( { user, conversation }: IConversationProps, ref: ForwardedRef<any> ) => {
-   const { activeConversation } = useAppSelector(state => state.conversationReducer);
+export const ConversationItem = forwardRef( ( { user, conversation }: IConversationProps, ref: ForwardedRef<any> ) => {
+   const { activeConversation } = useAppSelector( state => state.conversationReducer );
 
-   const { onlineContactsIds } = useAppSelector(state => state.userReducer);
+   const { onlineContactsIds } = useAppSelector( state => state.userReducer );
 
    const dispatch = useAppDispatch();
 
    const selectConversation = () => {
-      dispatch(conversationActions.setActiveConversation({
+      dispatch( conversationActions.setActiveConversation( {
          ...conversation,
          username: user?.username
-      }));
+      } ) );
    };
 
-   const conversationTime = moment(+conversation.lastModified).format("HH:mm");
+   const conversationTime = moment( +conversation.lastModified ).format( "HH:mm" );
 
    const { FONT_SECOND, FONT_COLOR, AVATAR_BORDER, CONVERSATION_ACTIVE_COLOR, MAIN_COLOR, WHITE_COLOR } = useColorValues();
 
@@ -54,18 +54,18 @@ export const ConversationItem = forwardRef(( { user, conversation }: IConversati
                    { conversation.isGroupConversation &&
                        <AvatarGroup size={ "md" }
                                     max={ 2 }>
-                          { conversation.users.map(user =>
+                          { conversation.users.map( user =>
                               <Avatar key={ v4() }
                                       showBorder={ true }
                                       borderColor={ AVATAR_BORDER }
                                       name={ user.username }
-                                      src={ getImageUrl(user.image, user.email) }
+                                      src={ getImageUrl( user.image, user.email ) }
                                       ignoreFallback={ true }
                                       size={ "lg" }>
-                                 { onlineContactsIds.includes(user.id) && <AvatarBadge boxSize={ 4 }
-                                                                                       borderColor={ "white" }
-                                                                                       bg={ MAIN_COLOR }/> }
-                              </Avatar>) }
+                                 { onlineContactsIds.includes( user.id ) && <AvatarBadge boxSize={ 4 }
+                                                                                         borderColor={ "white" }
+                                                                                         bg={ MAIN_COLOR }/> }
+                              </Avatar> ) }
                        </AvatarGroup>
                    }
 
@@ -73,12 +73,12 @@ export const ConversationItem = forwardRef(( { user, conversation }: IConversati
                        <Avatar name={ user?.username }
                                showBorder={ true }
                                borderColor={ AVATAR_BORDER }
-                               src={ getImageUrl(user.image, user.email) }
+                               src={ getImageUrl( user.image, user.email ) }
                                ignoreFallback={ true }
                                size={ "lg" }>
-                          { onlineContactsIds.includes(user.id) && <AvatarBadge boxSize={ 5 }
-                                                                                borderColor={ "white" }
-                                                                                bg={ MAIN_COLOR }/> }
+                          { onlineContactsIds.includes( user.id ) && <AvatarBadge boxSize={ 5 }
+                                                                                  borderColor={ "white" }
+                                                                                  bg={ MAIN_COLOR }/> }
                        </Avatar>
                    }
 
@@ -91,7 +91,8 @@ export const ConversationItem = forwardRef(( { user, conversation }: IConversati
                          { conversation.isGroupConversation ? conversation.conversationName : user?.username }
                       </Heading>
 
-                      <Text color={ conversation.id === activeConversation.id ? WHITE_COLOR : FONT_SECOND } noOfLines={ 1 }>
+                      <Text color={ conversation.id === activeConversation.id ? WHITE_COLOR : FONT_SECOND }
+                            noOfLines={ 1 }>
                          {
                             (conversation.lastMessage?.content && !conversation.lastMessage.isImage)
                                 ? conversation.lastMessage.content
@@ -128,4 +129,4 @@ export const ConversationItem = forwardRef(( { user, conversation }: IConversati
 
        </VStack>
    );
-});
+} );

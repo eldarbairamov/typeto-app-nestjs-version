@@ -14,15 +14,15 @@ export function MiniSideBar() {
    const [ content, setContent ] = useState<JSX.Element>();
 
    const createGroupConversation = () => {
-      setContent(<GroupConversationMenu isOnlyMessage={ true } onModalClose={ onClose }/>);
+      setContent( <GroupConversationMenu isOnlyMessage={ true } onModalClose={ onClose }/> );
       onOpen();
    };
 
    const dispatch = useAppDispatch();
 
-   const { lastElemRef } = useObserver(() => {
-      dispatch(conversationActions.limitIncrease());
-   });
+   const { lastElemRef } = useObserver( () => {
+      dispatch( conversationActions.limitIncrease() );
+   } );
 
    const { BG_SECOND, MAIN_COLOR } = useColorValues();
 
@@ -44,7 +44,7 @@ export function MiniSideBar() {
                             variant={ "outline" }/>
 
                 <MenuList rounded={ 10 }
-                          bg={BG_SECOND}
+                          bg={ BG_SECOND }
                           p={ 0 }>
                    <SearchBar height={ "45px" } width={ "100%" }/>
                 </MenuList>
@@ -52,7 +52,7 @@ export function MiniSideBar() {
           </Center>
 
           <Box p={ "0 20px 0 20px" }
-               h={ calc("100%").subtract("160px").toString() }
+               h={ calc( "100%" ).subtract( "160px" ).toString() }
                alignItems={ "flex-start" }
                w={ "100%" }>
 

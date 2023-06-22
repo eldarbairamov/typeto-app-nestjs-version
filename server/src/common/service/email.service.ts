@@ -4,8 +4,8 @@ import { emailTemplate } from "../email-template/email-template";
 import path from "node:path";
 import { IEnvironment } from "../interface/env.inteface";
 import { EmailActionType } from "../type/email-action.type";
-import nodemailer from "nodemailer"
-import hbs from "nodemailer-express-handlebars"
+import nodemailer from "nodemailer";
+import hbs from "nodemailer-express-handlebars";
 import { EMAIL_TEMPLATES_PATH } from "../constant";
 
 @Injectable()

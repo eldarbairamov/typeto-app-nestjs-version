@@ -4,7 +4,7 @@ import { AuthorizedLayout } from "../layout";
 import { ChatsPage } from "../page";
 import { UnauthorizedPage } from "../page/Unauthorized-Page/Unauthorized-Page.tsx";
 
-export const AuthorizedRouter = createBrowserRouter([
+export const AuthorizedRouter = createBrowserRouter( [
    {
       path: "/",
       element: <AuthorizedLayout/>,
@@ -29,4 +29,4 @@ export const AuthorizedRouter = createBrowserRouter([
       path: "*",
       element: <Navigate to={ "/" }/>,
    },
-]);
+] );

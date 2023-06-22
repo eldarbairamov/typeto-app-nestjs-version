@@ -1,7 +1,6 @@
 import { ConversationAttr, ConversationUserAttr, UserModel } from "../model";
 
 export const groupConversationPresenter = ( conversation: ConversationAttr, userId: number ) => {
-
    return {
       ...conversation,
       isNewMessagesExist: conversation.users
@@ -18,6 +17,6 @@ export const groupConversationPresenter = ( conversation: ConversationAttr, user
           } )
           .filter( res => res !== null )[0],
       lastMessage: conversation.lastMessage
-   }
+   };
 
 };

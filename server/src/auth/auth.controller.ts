@@ -14,14 +14,14 @@ export class AuthController {
    @UseGuards( RegistrationGuard )
    @Post( "registration" )
    async registration( @Body() dto: RegistrationDto ) {
-      await this.authService.registration( dto )
-      return { message: "Success" }
+      await this.authService.registration( dto );
+      return { message: "Success" };
    }
 
    @UseGuards( LoginGuard )
    @Post( "login" )
    async login( @Req() request: Request & { user: UserModel } ) {
-      return this.authService.login( request.user )
+      return this.authService.login( request.user );
    }
 
    @Post( "forgot_password" )
@@ -30,21 +30,21 @@ export class AuthController {
        @Body( "email" ) email: string
    ) {
       const clientUrl = request.headers.origin;
-      await this.authService.forgotPassword( email, clientUrl )
-      return { message: "Success" }
+      await this.authService.forgotPassword( email, clientUrl );
+      return { message: "Success" };
    }
 
    @Patch( "reset_password" )
    async resetPassword( @Body() dto: ResetPasswordDto ) {
-      await this.authService.resetPassword( dto )
-      return { message: "Success" }
+      await this.authService.resetPassword( dto );
+      return { message: "Success" };
    }
 
    @UseGuards( AccessGuard )
    @Delete( "logout" )
    async logout( @User( "token" ) token: string ) {
-      await this.authService.logout( token )
-      return { message: "Success" }
+      await this.authService.logout( token );
+      return { message: "Success" };
    }
 
    @UseGuards( RefreshGuard )
@@ -52,7 +52,7 @@ export class AuthController {
    async refresh(
        @User() user: { userId: number, refreshToken: string }
    ) {
-      return this.authService.refresh( user.refreshToken, user.userId )
+      return this.authService.refresh( user.refreshToken, user.userId );
    }
 
 }

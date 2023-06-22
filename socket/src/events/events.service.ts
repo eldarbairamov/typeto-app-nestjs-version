@@ -124,7 +124,7 @@ export class EventsService {
                      [Op.ne]: whoWasKickedId
                   }
                }
-            ], 
+            ],
          },
       } )
           .then( conversationUser => conversationUser.map( c => c.userId ) );
@@ -149,7 +149,7 @@ export class EventsService {
 
       const whoTyping = await this.userModel.findByPk( whoTypingId );
 
-      return { conversationWith, whoTyping }
+      return { conversationWith, whoTyping };
    }
 
    async stopTyping( conversationId: number, whoIsTypingId: number ) {
@@ -165,7 +165,7 @@ export class EventsService {
 
       const whoIsTyping = await this.userModel.findByPk( whoIsTypingId );
 
-      return { conversationWith, whoIsTyping }
+      return { conversationWith, whoIsTyping };
    }
 
 

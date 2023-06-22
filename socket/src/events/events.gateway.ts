@@ -6,7 +6,6 @@ import { EventsService } from "./events.service";
 import { Server, Socket } from "socket.io";
 import { IMessage, ISocketUser } from "./interface";
 import { CYAN_COLOR, GREEN_COLOR, MAGENTA, RED_COLOR } from "./constant/colors.constant";
-import { CreateConversationDto, DeleteConversationDto, DeleteGroupConversationDto, DeleteMessageDto, KickUserFromGroupConversationDto, LeaveGroupConversationDto, TypingDto } from "./dto";
 
 @WebSocketGateway( { cors: "*", } )
 export class EventsGateway implements OnGatewayConnection, OnGatewayDisconnect {
@@ -63,12 +62,12 @@ export class EventsGateway implements OnGatewayConnection, OnGatewayDisconnect {
 
    @SubscribeMessage( "create_conversation" )
    async createConversation(
-       @MessageBody() dto: CreateConversationDto,
+       @MessageBody() data: [ conversationId: number, whoCreatedId: number, conversationWith: number[] ],
        @ConnectedSocket() socket: Socket
    ) {
       console.log( MAGENTA, "socket: create_conversation" );
 
-      const { conversationId, whoCreatedId, conversationWith } = dto;
+      const [ conversationId, whoCreatedId, conversationWith ] = data;
 
       const conversation = await this.eventService.createConversation( conversationId, whoCreatedId );
 
@@ -84,12 +83,12 @@ export class EventsGateway implements OnGatewayConnection, OnGatewayDisconnect {
 
    @SubscribeMessage( "delete_conversation" )
    async deleteConversation(
-       @MessageBody() dto: DeleteConversationDto,
+       @MessageBody() data: [ conversationId: number, conversationWith: number, whoDeleted: { id: number, username: string } ],
        @ConnectedSocket() socket: Socket
    ) {
       console.log( MAGENTA, "socket: delete_conversation" );
 
-      const { conversationId, conversationWith, whoDeleted } = dto;
+      const [ conversationId, conversationWith, whoDeleted ] = data;
 
       const to = String( this.sessionManagerService.getUser( this.users, conversationWith ) );
       this.io.to( to ).emit( "get_delete_result", conversationId, whoDeleted.username );
@@ -97,11 +96,11 @@ export class EventsGateway implements OnGatewayConnection, OnGatewayDisconnect {
 
    @SubscribeMessage( "leave_group_conversation" )
    async leaveGroupConversation(
-       @MessageBody() dto: LeaveGroupConversationDto
+       @MessageBody() data: [ conversationId: number, conversationWith: number[], whoLeft: string ]
    ) {
       console.log( MAGENTA, "socket: leave_group_conversation" );
 
-      const { conversationId, conversationWith, whoLeft } = dto;
+      const [ conversationId, conversationWith, whoLeft ] = data;
 
       const conversation = await this.eventService.leaveGroupConversation( conversationId );
 
@@ -111,11 +110,11 @@ export class EventsGateway implements OnGatewayConnection, OnGatewayDisconnect {
 
    @SubscribeMessage( "delete_group_conversation" )
    async deleteGroupConversation(
-       @MessageBody() dto: DeleteGroupConversationDto
+       @MessageBody() data: [ conversationWith: number[], conversationId: number, adminName: string ]
    ) {
       console.log( MAGENTA, "socket: delete_group_conversation" );
 
-      const { conversationId, conversationWith, adminName } = dto;
+      const [ conversationWith, conversationId, adminName ] = data;
 
       const to = this.sessionManagerService.getUsers( this.users, conversationWith ) as string[];
       if ( to.length ) this.io.to( to ).emit( "get_delete_group_result", conversationId, adminName );
@@ -123,11 +122,11 @@ export class EventsGateway implements OnGatewayConnection, OnGatewayDisconnect {
 
    @SubscribeMessage( "delete_message" )
    async deleteMessage(
-       @MessageBody() dto: DeleteMessageDto
+       @MessageBody() data: [ messageId: number, conversationId: number, currentUserId: number ]
    ) {
       console.log( MAGENTA, "socket: delete_message" );
 
-      const { messageId, currentUserId, conversationId } = dto;
+      const [ messageId, conversationId, currentUserId ] = data;
 
       const { conversationWith, updatedLastMessage } = await this.eventService.deleteMessage( conversationId, currentUserId );
       const to = this.sessionManagerService.getUsers( this.users, conversationWith ) as string[];
@@ -149,11 +148,11 @@ export class EventsGateway implements OnGatewayConnection, OnGatewayDisconnect {
 
    @SubscribeMessage( "kick_user_from_group_conversation" )
    async kickUserFromGroupConversation(
-       @MessageBody() dto: KickUserFromGroupConversationDto
+       @MessageBody() data: [ conversationId: number, whoWasKickedId: number, adminId: number ]
    ) {
       console.log( MAGENTA, "socket: kick_user_from_group_conversation" );
 
-      const { conversationId, whoWasKickedId, adminId } = dto;
+      const [ conversationId, whoWasKickedId, adminId ] = data;
 
       const { whoIsAdmin, whoWillSeeChanges, conversation } = await this.eventService.kickUser( conversationId, whoWasKickedId, adminId );
 
@@ -166,11 +165,11 @@ export class EventsGateway implements OnGatewayConnection, OnGatewayDisconnect {
 
    @SubscribeMessage( "typing" )
    async typing(
-       @MessageBody() dto: TypingDto
+       @MessageBody() data: [ conversationId: number, whoTypingId: number ]
    ) {
       console.log( MAGENTA, "socket: typing" );
 
-      const { whoTypingId, conversationId } = dto;
+      const [ conversationId, whoTypingId ] = data;
 
       const { whoTyping, conversationWith } = await this.eventService.typing( conversationId, whoTypingId );
 
@@ -179,10 +178,12 @@ export class EventsGateway implements OnGatewayConnection, OnGatewayDisconnect {
    }
 
    @SubscribeMessage( "stop_typing" )
-   async stopTyping( @MessageBody() dto: TypingDto ) {
+   async stopTyping(
+       @MessageBody() data: [ conversationId: number, whoTypingId: number ]
+   ) {
       console.log( MAGENTA, "socket: stop_typing" );
 
-      const { conversationId, whoTypingId } = dto;
+      const [ conversationId, whoTypingId ] = data;
 
       const { whoIsTyping, conversationWith } = await this.eventService.stopTyping( conversationId, whoTypingId );
 

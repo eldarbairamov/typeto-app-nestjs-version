@@ -12,14 +12,14 @@ interface IIncomingMessage {
 }
 
 export function IncomingMessage( { message }: IIncomingMessage ) {
-   const conversationTime = moment(+message.lastModified).format("HH:mm");
+   const conversationTime = moment( +message.lastModified ).format( "HH:mm" );
 
    const { isOpen, onOpen, onClose } = useDisclosure();
 
    const [ content, setContent ] = useState<JSX.Element>();
 
    const openImage = () => {
-      setContent(<ShowImage image={ message.content } userEmail={ message.sender.email }/>);
+      setContent( <ShowImage image={ message.content } userEmail={ message.sender.email }/> );
       onOpen();
    };
 
@@ -38,7 +38,7 @@ export function IncomingMessage( { message }: IIncomingMessage ) {
                         ignoreFallback={ true }
                         showBorder={ true }
                         borderColor={ AVATAR_BORDER }
-                        src={ getImageUrl(message.sender.image, message.sender.email) }
+                        src={ getImageUrl( message.sender.image, message.sender.email ) }
                         size={ "md" }/>
 
                 <Text color={ FONT_COLOR }> { conversationTime } </Text>
@@ -57,7 +57,7 @@ export function IncomingMessage( { message }: IIncomingMessage ) {
                 </Heading>
 
                 { message.isImage
-                    ? <Image src={ getImageUrl(message.content, message.sender.email) }
+                    ? <Image src={ getImageUrl( message.content, message.sender.email ) }
                              borderRadius={ 20 }
                              cursor={ "pointer" }
                              onClick={ openImage }

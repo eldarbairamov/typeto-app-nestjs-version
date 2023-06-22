@@ -7,11 +7,11 @@ import { ConversationUserItem } from "../../../component";
 import { conversationOptionsService } from "../../../service";
 
 export function ChatBoxOptions() {
-   const { activeConversation } = useAppSelector(state => state.conversationReducer);
+   const { activeConversation } = useAppSelector( state => state.conversationReducer );
 
-   const { currentUserInfo } = useAppSelector(state => state.userReducer);
+   const { currentUserInfo } = useAppSelector( state => state.userReducer );
 
-   const { deleteConversation, deleteGroupConversation, leaveGroupConversation } = conversationOptionsService(activeConversation);
+   const { deleteConversation, deleteGroupConversation, leaveGroupConversation } = conversationOptionsService( activeConversation );
 
    const { MAIN_COLOR, BG_SECOND, WHITE_COLOR, BUTTON_HOVER_COLOR, MAIN_COLOR_SUPER_LIGHT } = useColorValues();
 
@@ -37,17 +37,17 @@ export function ChatBoxOptions() {
 
                 { activeConversation.isGroupConversation &&
                     <>
-                      <VStack p={ 5 }
-                              spacing={ 5 }>
+                        <VStack p={ 5 }
+                                spacing={ 5 }>
 
-                         { activeConversation.users && activeConversation?.users.map(item =>
-                             <ConversationUserItem key={ v4() }
-                                                   user={ item }/>
-                         ) }
+                           { activeConversation.users && activeConversation?.users.map( item =>
+                               <ConversationUserItem key={ v4() }
+                                                     user={ item }/>
+                           ) }
 
-                      </VStack>
+                        </VStack>
 
-                      <Divider/>
+                        <Divider/>
                     </>
                 }
 

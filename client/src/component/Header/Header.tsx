@@ -14,12 +14,12 @@ export function Header() {
    const [ content, setContent ] = useState<JSX.Element>();
 
    const openFindUsers = () => {
-      setContent(<FindUser onModalClose={ onClose }/>);
+      setContent( <FindUser onModalClose={ onClose }/> );
       onOpen();
    };
 
    const openFriendList = () => {
-      setContent(<ContactsMenu onModalClose={ onClose }/>);
+      setContent( <ContactsMenu onModalClose={ onClose }/> );
       onOpen();
    };
 

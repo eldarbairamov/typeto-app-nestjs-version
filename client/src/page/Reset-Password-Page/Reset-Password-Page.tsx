@@ -11,30 +11,30 @@ import { UnauthorizedRouter, UnauthorizedRoutesEnum } from "../../router";
 import { useColorValues } from "../../constant";
 
 export function ResetPasswordPage() {
-   const { isLoading } = useAppSelector(state => state.authReducer);
+   const { isLoading } = useAppSelector( state => state.authReducer );
 
    const [ searchParams ] = useSearchParams();
 
-   const resetPasswordToken = searchParams.get("token");
+   const resetPasswordToken = searchParams.get( "token" );
 
    const dispatch = useAppDispatch();
 
-   const { register, handleSubmit, formState: { errors, isValid } } = useForm<IResetPasswordForm>({
+   const { register, handleSubmit, formState: { errors, isValid } } = useForm<IResetPasswordForm>( {
       mode: "onTouched",
-      resolver: joiResolver(resetPasswordValidator)
-   });
+      resolver: joiResolver( resetPasswordValidator )
+   } );
 
    const resetPassword = async ( resetPasswordToken: string, password: string ) => {
-      const result = await dispatch(authAsyncActions.resetPassword({ resetPasswordToken, password }));
-      if (authAsyncActions.resetPassword.fulfilled.match(result)) {
-         dispatch(appActions.setActionMessage({ message: "Ура! У вас новий пароль!", type: "info" }));
-         UnauthorizedRouter.navigate(UnauthorizedRoutesEnum.LoginPage);
+      const result = await dispatch( authAsyncActions.resetPassword( { resetPasswordToken, password } ) );
+      if ( authAsyncActions.resetPassword.fulfilled.match( result ) ) {
+         dispatch( appActions.setActionMessage( { message: "Ура! У вас новий пароль!", type: "info" } ) );
+         UnauthorizedRouter.navigate( UnauthorizedRoutesEnum.LoginPage );
       }
    };
 
    const onSubmit: SubmitHandler<IResetPasswordForm> = async ( { repeatPassword, newPassword }: IResetPasswordForm ) => {
-      if ((newPassword && resetPasswordToken) && (newPassword === repeatPassword)) await resetPassword(resetPasswordToken, newPassword);
-      else dispatch(appActions.setActionMessage({ message: "Паролі не співпадають", type: "error" }));
+      if ( (newPassword && resetPasswordToken) && (newPassword === repeatPassword) ) await resetPassword( resetPasswordToken, newPassword );
+      else dispatch( appActions.setActionMessage( { message: "Паролі не співпадають", type: "error" } ) );
    };
 
    const { BUTTON_COLOR, BUTTON_HOVER_COLOR, MAIN_COLOR, BG_SECOND } = useColorValues();
@@ -49,7 +49,7 @@ export function ResetPasswordPage() {
                   spacing={ 10 }
                   rounded={ 20 }>
 
-             <form onSubmit={ handleSubmit(onSubmit) }>
+             <form onSubmit={ handleSubmit( onSubmit ) }>
 
                 <VStack alignItems={ "stretch" }
                         spacing={ 0 }

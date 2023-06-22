@@ -20,16 +20,16 @@ export function OutcomingMessage( { message }: IOutcomingMessage ) {
 
    const [ content, setContent ] = useState<JSX.Element>();
 
-   const conversationTime = moment(+message.lastModified).format("HH:mm");
+   const conversationTime = moment( +message.lastModified ).format( "HH:mm" );
 
    const openImage = () => {
-      setContent(<ShowImage image={ message.content } userEmail={ message.sender.email }/>);
+      setContent( <ShowImage image={ message.content } userEmail={ message.sender.email }/> );
       onOpen();
    };
 
-   const { currentUserInfo } = useAppSelector(state => state.userReducer);
+   const { currentUserInfo } = useAppSelector( state => state.userReducer );
 
-   const { deleteMessage } = deleteMessageService(message);
+   const { deleteMessage } = deleteMessageService( message );
 
    const { FONT_COLOR, MAIN_COLOR, AVATAR_BORDER, WHITE_COLOR, MESSAGE_OUTCOMING_COLOR } = useColorValues();
 
@@ -63,7 +63,7 @@ export function OutcomingMessage( { message }: IOutcomingMessage ) {
                    </Heading>
 
                    { message.isImage
-                       ? <Image src={ getImageUrl(message.content, message.sender.email) }
+                       ? <Image src={ getImageUrl( message.content, message.sender.email ) }
                                 rounded={ 20 }
                                 transition={ ".3s" }
                                 onClick={ openImage }
@@ -80,7 +80,7 @@ export function OutcomingMessage( { message }: IOutcomingMessage ) {
                         ignoreFallback={ true }
                         showBorder={ true }
                         borderColor={ AVATAR_BORDER }
-                        src={ getImageUrl(currentUserInfo.image, currentUserInfo.email) }
+                        src={ getImageUrl( currentUserInfo.image, currentUserInfo.email ) }
                         size={ "md" }/>
 
                 <Text color={ FONT_COLOR }> { conversationTime } </Text>

@@ -7,5 +7,5 @@ export interface IUser {
 
 export interface ISocketUser {
    userId: number;
-   socketId: string
+   socketId: string;
 }

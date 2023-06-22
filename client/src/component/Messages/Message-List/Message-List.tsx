@@ -7,9 +7,9 @@ import { ImageLoader, NewMessageAlert } from "../../UI";
 import { useColorValues } from "../../../constant";
 
 export function MessageList() {
-   const { currentUserInfo } = useAppSelector(state => state.userReducer);
+   const { currentUserInfo } = useAppSelector( state => state.userReducer );
 
-   const { isMessagesLoading, messages, isNewMessageAdded, isImageSending, prevMessagesLength } = useAppSelector(state => state.messageReducer);
+   const { isMessagesLoading, messages, isNewMessageAdded, isImageSending, prevMessagesLength } = useAppSelector( state => state.messageReducer );
 
    const { isOpen: isVisible, onClose, onOpen, } = useDisclosure();
 
@@ -18,37 +18,37 @@ export function MessageList() {
        prevMessagesLength,
        messages,
        onClose,
-       onOpen);
+       onOpen );
 
    const { MAIN_COLOR } = useColorValues();
 
-   if (isMessagesLoading) {
+   if ( isMessagesLoading ) {
       return (
           <Center w={ "100%" }
-                  h={ calc("100%").subtract("100px").toString() }>
+                  h={ calc( "100%" ).subtract( "100px" ).toString() }>
              <Spinner size={ "xl" } thickness={ "5px" } color={ MAIN_COLOR }/>
           </Center>
       );
    }
 
    return (
-       <VStack h={ calc("100%").subtract("100px").toString() }
+       <VStack h={ calc( "100%" ).subtract( "100px" ).toString() }
                spacing={ -5 }
                ref={ messageListRef }
                p={ "0 40px 0 40px" }
                overflow={ "scroll" }
                w={ "100%" }>
 
-          { Boolean(messages.length) && messages.map(message => {
-             if (message.sender.id === currentUserInfo.id) {
+          { Boolean( messages.length ) && messages.map( message => {
+             if ( message.sender.id === currentUserInfo.id ) {
                 return <OutcomingMessage key={ v4() }
                                          message={ message }/>;
              }
-             if (message.sender.id !== currentUserInfo.id) {
+             if ( message.sender.id !== currentUserInfo.id ) {
                 return <IncomingMessage key={ v4() }
                                         message={ message }/>;
              }
-          }) }
+          } ) }
 
           { (isImageSending) && <ImageLoader/> }
 

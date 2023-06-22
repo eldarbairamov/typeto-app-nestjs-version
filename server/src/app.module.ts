@@ -7,6 +7,8 @@ import { dbConfig } from "./config/db-config";
 import { MessageModule } from "./message/message.module";
 import { ConversationModule } from "./conversation/conversation.module";
 import { AuthModule } from "./auth/auth.module";
+import { ServeStaticModule } from "@nestjs/serve-static";
+import path from "node:path";
 
 @Module( {
    imports: [
@@ -16,6 +18,7 @@ import { AuthModule } from "./auth/auth.module";
          envFilePath: ".env"
       } ),
       SequelizeModule.forRoot( dbConfig ),
+      ServeStaticModule.forRoot( { rootPath: path.join( process.cwd(), "client" ) } ),
       UserModule,
       MessageModule,
       ConversationModule,

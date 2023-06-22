@@ -8,18 +8,18 @@ import { BiCrown, FiUserMinus } from "react-icons/all";
 import { useColorValues } from "../../../constant";
 
 export function ConversationUserItem( { user }: { user: IUserFromConversation } ) {
-   const { activeConversation } = useAppSelector(state => state.conversationReducer);
+   const { activeConversation } = useAppSelector( state => state.conversationReducer );
 
-   const { currentUserInfo } = useAppSelector(state => state.userReducer);
+   const { currentUserInfo } = useAppSelector( state => state.userReducer );
 
    const dispatch = useAppDispatch();
 
    const kickUserFromGroupConversation = async ( userId: number ) => {
-      const result = await dispatch(conversationAsyncActions.kickUserFromGroupConversation({
+      const result = await dispatch( conversationAsyncActions.kickUserFromGroupConversation( {
          userId, conversationId: activeConversation.id
-      }));
-      if (conversationAsyncActions.kickUserFromGroupConversation.rejected.match(result)) {
-         dispatch(appActions.setActionMessage({ message: result.payload, type: "error" }));
+      } ) );
+      if ( conversationAsyncActions.kickUserFromGroupConversation.rejected.match( result ) ) {
+         dispatch( appActions.setActionMessage( { message: result.payload, type: "error" } ) );
       }
    };
 
@@ -35,7 +35,7 @@ export function ConversationUserItem( { user }: { user: IUserFromConversation } 
              <Avatar name={ user.username }
                      showBorder={ true }
                      borderColor={ AVATAR_BORDER }
-                     src={ getImageUrl(user.image, user.email) }
+                     src={ getImageUrl( user.image, user.email ) }
                      size={ "sm" }/>
 
              <Heading size={ "sm" } color={ FONT_COLOR }> { user.username } </Heading>
@@ -46,7 +46,7 @@ export function ConversationUserItem( { user }: { user: IUserFromConversation } 
               ? <ButtonIcon size={ 6 }
                             color={ ICON_COLOR }
                             cursor={ activeConversation.adminId === user.id ? "default" : "pointer" }
-                            fn={ activeConversation.adminId !== user.id ? () => kickUserFromGroupConversation(user.id) : undefined }
+                            fn={ activeConversation.adminId !== user.id ? () => kickUserFromGroupConversation( user.id ) : undefined }
                             as={ activeConversation.adminId === user.id ? BiCrown : FiUserMinus }/>
 
               : <ButtonIcon size={ 6 }

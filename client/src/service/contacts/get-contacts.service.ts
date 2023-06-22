@@ -6,10 +6,10 @@ export const getContactsService = ( value: string ) => {
 
    const dispatch = useAppDispatch();
 
-   const getContactsFn = async () => dispatch(userAsyncActions.getContacts({ searchKey: value }));
+   const getContactsFn = async () => dispatch( userAsyncActions.getContacts( { searchKey: value } ) );
 
-   useEffect(() => {
+   useEffect( () => {
       getContactsFn();
-   }, [ value ]);
+   }, [ value ] );
 
 };

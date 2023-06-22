@@ -24,21 +24,21 @@ export class AuthService {
    }
 
    async registration( dto: RegistrationDto ) {
-      await this.userModel.create( { email: dto.email, username: dto.username, password: dto.password } )
-      await this.emailService.send( dto.email, REGISTRATION, { username: dto.username } )
+      await this.userModel.create( { email: dto.email, username: dto.username, password: dto.password } );
+      await this.emailService.send( dto.email, REGISTRATION, { username: dto.username } );
    }
 
    async login( user: UserModel ) {
       const tokenPair = this.tokenService.generatePair( { userId: user.id } );
-      await this.oAuthModel.create( { ownerId: user.id, ...tokenPair } )
-      return { ...tokenPair }
+      await this.oAuthModel.create( { ownerId: user.id, ...tokenPair } );
+      return { ...tokenPair };
    }
 
    async forgotPassword( email: string, clientUrl: string ) {
       const user = await this.userModel.findOne( { where: { email } } );
       if ( !user ) throw new HttpException( "User is not found", HttpStatus.UNAUTHORIZED );
 
-      const resetPasswordToken = this.tokenService.generate( { userId: user.id }, this.configService.get( "SECRET_RESET_PASS_KEY" ) )
+      const resetPasswordToken = this.tokenService.generate( { userId: user.id }, this.configService.get( "SECRET_RESET_PASS_KEY" ) );
       const resetPasswordLink = `${ clientUrl }/reset_password/new?token=${ resetPasswordToken }`;
 
       await this.actionToken.create( {
@@ -78,7 +78,7 @@ export class AuthService {
    }
 
    async validateUser( email: string, password: string ) {
-      const user = await this.userModel.findOne( { where: { email } } )
+      const user = await this.userModel.findOne( { where: { email } } );
 
       const isPasswordValid = user ? await this.passwordService.passComparer( password, user.password ) : null;
 

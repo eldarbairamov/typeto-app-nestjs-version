@@ -1,4 +1,4 @@
-import {  BelongsToMany, Column, DataType, Model, Table } from "sequelize-typescript";
+import { BelongsToMany, Column, DataType, Model, Table } from "sequelize-typescript";
 import { ContactModel } from "./contact.model";
 import { ConversationModel } from "./conversation.model";
 import { ConversationUserModel } from "./conversation-user.model";

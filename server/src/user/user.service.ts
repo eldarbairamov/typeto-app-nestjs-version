@@ -29,7 +29,7 @@ export class UserService {
 
       if ( !user ) throw new HttpException( "User is not found", HttpStatus.NOT_FOUND );
 
-      return { user, isAlreadyAdded: Boolean( isAlreadyAdded ) };
+      return { ...user, isAlreadyAdded: Boolean( isAlreadyAdded ) };
    }
 
    async getCurrentUser( currentUserId: number ) {

@@ -48,7 +48,6 @@ export class GetConversationService {
          ]
       } )
           .then( conversation => {
-
              if ( conversation && conversation.isGroupConversation ) return groupConversationPresenter( conversation.toJSON(), whoWillReceive === "sender" ? senderId : receiverId );
              if ( conversation && !conversation.isGroupConversation ) return privateConversationPresenter( conversation.toJSON(), whoWillReceive === "sender" ? senderId : receiverId );
 

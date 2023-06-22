@@ -1,2 +1,2 @@
-export * from "./conversation.model"
-export * from "./conversation-user.model"
+export * from "./conversation.model";
+export * from "./conversation-user.model";

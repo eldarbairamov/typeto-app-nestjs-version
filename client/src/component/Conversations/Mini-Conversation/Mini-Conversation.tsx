@@ -12,17 +12,17 @@ interface IConversationProps {
    user?: IUserFromConversation;
 }
 
-export const MiniConversation = forwardRef(( { user, conversation }: IConversationProps, ref: ForwardedRef<any> ) => {
-   const { activeConversation } = useAppSelector(state => state.conversationReducer);
-   const { onlineContactsIds } = useAppSelector(state => state.userReducer);
+export const MiniConversation = forwardRef( ( { user, conversation }: IConversationProps, ref: ForwardedRef<any> ) => {
+   const { activeConversation } = useAppSelector( state => state.conversationReducer );
+   const { onlineContactsIds } = useAppSelector( state => state.userReducer );
 
    const dispatch = useAppDispatch();
 
    const selectConversation = () => {
-      dispatch(conversationActions.setActiveConversation({
+      dispatch( conversationActions.setActiveConversation( {
          ...conversation,
          username: user?.username
-      }));
+      } ) );
    };
 
    const { CONVERSATION_ACTIVE_COLOR, MAIN_COLOR, AVATAR_BORDER } = useColorValues();
@@ -47,22 +47,22 @@ export const MiniConversation = forwardRef(( { user, conversation }: IConversati
                 { conversation.isGroupConversation &&
                     <AvatarGroup size={ "sm" }
                                  max={ 1 }>
-                       { conversation.users.map(user =>
+                       { conversation.users.map( user =>
                            <Avatar key={ v4() }
                                    showBorder={ true }
                                    borderColor={ AVATAR_BORDER }
-                                   src={ getImageUrl(user.image, user.email) }
+                                   src={ getImageUrl( user.image, user.email ) }
                                    ignoreFallback={ true }
                                    name={ user.username }
                                    size={ "md" }>
 
-                              { onlineContactsIds.includes(user.id)
+                              { onlineContactsIds.includes( user.id )
                                   && <AvatarBadge boxSize={ 3 }
                                                   borderColor={ "white" }
                                                   bg={ MAIN_COLOR }/>
                               }
 
-                           </Avatar>)
+                           </Avatar> )
                        }
                     </AvatarGroup>
                 }
@@ -71,11 +71,11 @@ export const MiniConversation = forwardRef(( { user, conversation }: IConversati
                     <Avatar name={ user?.username }
                             showBorder={ true }
                             borderColor={ AVATAR_BORDER }
-                            src={ getImageUrl(user.image, user.email) }
+                            src={ getImageUrl( user.image, user.email ) }
                             ignoreFallback={ true }
                             size={ "md" }>
 
-                       { onlineContactsIds.includes(user.id)
+                       { onlineContactsIds.includes( user.id )
                            && <AvatarBadge boxSize={ 4 }
                                            borderColor={ "white" }
                                            bg={ MAIN_COLOR }/>
@@ -91,4 +91,4 @@ export const MiniConversation = forwardRef(( { user, conversation }: IConversati
           </VStack>
        </Tooltip>
    );
-});
+} );

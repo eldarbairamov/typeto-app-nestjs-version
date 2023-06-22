@@ -15,13 +15,13 @@ export function AppFormControl( { errorMessage, fieldName, labelName, register, 
    const { MAIN_COLOR_LIGHTER, PLACEHOLDER_COLOR, ALERT_COLOR, FONT_COLOR } = useColorValues();
 
    return (
-       <FormControl isInvalid={ Boolean(errorMessage) }
+       <FormControl isInvalid={ Boolean( errorMessage ) }
                     isRequired={ isRequired ? isRequired : false }
                     h={ 100 }>
 
           <FormLabel color={ PLACEHOLDER_COLOR }> { labelName } </FormLabel>
 
-          <Input { ...register(fieldName) }
+          <Input { ...register( fieldName ) }
                  focusBorderColor={ MAIN_COLOR_LIGHTER }
                  _invalid={ { borderColor: "red.500" } }
                  color={ FONT_COLOR }

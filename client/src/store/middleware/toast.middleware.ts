@@ -3,7 +3,7 @@ import { appActions, authAsyncActions, conversationAsyncActions, messageAsyncAct
 
 export const toastMiddleware = createListenerMiddleware();
 
-toastMiddleware.startListening({
+toastMiddleware.startListening( {
    matcher: isAnyOf(
        authAsyncActions.login.rejected,
        authAsyncActions.registration.rejected,
@@ -29,11 +29,11 @@ toastMiddleware.startListening({
 
       const message = action.payload;
 
-      dispatch(appActions.setActionMessage({ message: message, type: "error" }));
+      dispatch( appActions.setActionMessage( { message: message, type: "error" } ) );
    }
-});
+} );
 
-toastMiddleware.startListening({
+toastMiddleware.startListening( {
    matcher: isAnyOf(
        userAsyncActions.uploadAvatar.pending,
        userAsyncActions.deleteAvatar.pending,
@@ -42,11 +42,11 @@ toastMiddleware.startListening({
    effect: ( _, api ) => {
       const dispatch = api.dispatch;
 
-      dispatch(appActions.setActionMessage({ message: "зачекайте...", type: "loading" }));
+      dispatch( appActions.setActionMessage( { message: "зачекайте...", type: "loading" } ) );
    }
-});
+} );
 
-toastMiddleware.startListening({
+toastMiddleware.startListening( {
    matcher: isAnyOf(
        userAsyncActions.uploadAvatar.fulfilled,
        userAsyncActions.deleteAvatar.fulfilled,
@@ -55,6 +55,6 @@ toastMiddleware.startListening({
    effect: ( _, api ) => {
       const dispatch = api.dispatch;
 
-      dispatch(appActions.setIsToastClosed(true));
+      dispatch( appActions.setIsToastClosed( true ) );
    }
-});
+} );

@@ -1,1 +1,1 @@
-export * from "./is-even-number.validator"
+export * from "./is-even-number.validator";

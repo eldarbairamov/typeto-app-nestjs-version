@@ -13,15 +13,15 @@ export function SideBar() {
    const { isOpen, onOpen, onClose } = useDisclosure();
 
    const createGroupConversation = () => {
-      setContent(<GroupConversationMenu isOnlyMessage={ true } onModalClose={ onClose }/>);
+      setContent( <GroupConversationMenu isOnlyMessage={ true } onModalClose={ onClose }/> );
       onOpen();
    };
 
    const dispatch = useAppDispatch();
 
-   const { lastElemRef } = useObserver(() => {
-      dispatch(conversationActions.limitIncrease());
-   });
+   const { lastElemRef } = useObserver( () => {
+      dispatch( conversationActions.limitIncrease() );
+   } );
 
    const { BG_SECOND } = useColorValues();
 
@@ -37,7 +37,7 @@ export function SideBar() {
           <Box p={ "0 20px 0 20px" }
                alignItems={ "flex-start" }
                w={ "100%" }
-               h={ calc("100%").subtract("160px").toString() }>
+               h={ calc( "100%" ).subtract( "160px" ).toString() }>
 
              <ConversationList Conversation={ ConversationItem } ref={ lastElemRef }/>
           </Box>

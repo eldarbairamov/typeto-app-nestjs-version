@@ -9,16 +9,16 @@ import { useColorValues } from "../../../constant";
 export function SearchBar( { height, width }: { height?: string | number, width?: string | number } ) {
    const { value, handleChange } = useInputHandler();
 
-   const debounced = useDebounce(value);
+   const debounced = useDebounce( value );
 
    const dispatch = useAppDispatch();
 
    const { BG_SECOND, PLACEHOLDER_COLOR, MAIN_COLOR, FONT_COLOR } = useColorValues();
 
-   useEffect(() => {
-      if (debounced.length >= 1) dispatch(conversationActions.setSearchKey(debounced));
-      if (debounced.length < 1) dispatch(conversationActions.setSearchKey(undefined));
-   }, [ debounced ]);
+   useEffect( () => {
+      if ( debounced.length >= 1 ) dispatch( conversationActions.setSearchKey( debounced ) );
+      if ( debounced.length < 1 ) dispatch( conversationActions.setSearchKey( undefined ) );
+   }, [ debounced ] );
 
    return (
        <Center bg={ BG_SECOND }

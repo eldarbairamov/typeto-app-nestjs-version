@@ -5,7 +5,7 @@ import { AuthGuard } from "@nestjs/passport";
 export class AccessGuard extends AuthGuard( "access" ) {
 
    canActivate( context: ExecutionContext ) {
-      return super.canActivate( context )
+      return super.canActivate( context );
    }
 
    handleRequest( err, data ) {

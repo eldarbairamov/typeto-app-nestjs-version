@@ -30,12 +30,12 @@ export function ButtonIcon( { size, as, fn, bg, color, rounded, p, style, cursor
                       _hover={ { bg: "transparent" } }
                       onClick={ fn }>
 
-                <Icon as={ as }
-                      boxSize={ size }
-                      cursor={ cursor }
-                      _hover={ { color: MAIN_COLOR } }
-                      transition={ ".3s" }
-                      color={ color }/>
+                  <Icon as={ as }
+                        boxSize={ size }
+                        cursor={ cursor }
+                        _hover={ { color: MAIN_COLOR } }
+                        transition={ ".3s" }
+                        color={ color }/>
 
               </Button>
           }

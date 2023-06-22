@@ -3,14 +3,15 @@ import { ContactModel, UserModel } from "../user/model";
 import { MessageModel } from "../message/model/message.model";
 import { ConversationModel, ConversationUserModel } from "../conversation/model";
 import { ActionTokenModel, OAuthModel } from "../auth/model";
+import configuration from "../config";
 
 export const dbConfig: SequelizeModuleOptions = {
    dialect: "postgres",
-   host: "localhost",
-   port: 5432,
-   username: "postgres",
-   password: "010596",
-   database: "typeto_nestjs",
+   host: configuration().POSTGRES_HOST,
+   port: Number( configuration().POSTGRES_PORT ),
+   username: configuration().POSTGRES_USER,
+   password: configuration().POSTGRES_PASSWORD,
+   database: configuration().POSTGRES_DB,
    autoLoadModels: true,
    logging: false,
    models: [
@@ -22,4 +23,4 @@ export const dbConfig: SequelizeModuleOptions = {
       ConversationUserModel,
       ContactModel
    ],
-}
+};

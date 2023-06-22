@@ -12,8 +12,8 @@ export function UnauthorizedPage() {
 
    const login = async () => {
       storageApi.deleteTokens();
-      dispatch(authActions.logout());
-      UnauthorizedRouter.navigate(UnauthorizedRoutesEnum.LoginPage);
+      dispatch( authActions.logout() );
+      UnauthorizedRouter.navigate( UnauthorizedRoutesEnum.LoginPage );
    };
 
    return (

@@ -3,6 +3,6 @@ import { ValidationArguments, ValidatorConstraint, ValidatorConstraintInterface 
 @ValidatorConstraint( { name: "isEvenNumber" } )
 export class IsEvenNumber implements ValidatorConstraintInterface {
    validate( values: number[], args?: ValidationArguments ) {
-      return values.every( num => typeof num === "number" )
+      return values.every( num => typeof num === "number" );
    }
 }

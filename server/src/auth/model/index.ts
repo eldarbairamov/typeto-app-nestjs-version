@@ -1,2 +1,2 @@
-export * from "./o-auth.model"
-export * from "./action-token.model"
+export * from "./o-auth.model";
+export * from "./action-token.model";

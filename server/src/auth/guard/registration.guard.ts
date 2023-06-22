@@ -15,11 +15,11 @@ export class RegistrationGuard implements CanActivate {
       const [ email, username ] = await Promise.all( [
          this.userModel.findOne( { where: { email: candidate.email } } ),
          this.userModel.findOne( { where: { username: candidate.username } } )
-      ] )
+      ] );
 
-      if ( email ) throw new HttpException( "This email is already in use", HttpStatus.CONFLICT )
-      if ( username ) throw new HttpException( "This username is already in use", HttpStatus.CONFLICT )
+      if ( email ) throw new HttpException( "This email is already in use", HttpStatus.CONFLICT );
+      if ( username ) throw new HttpException( "This username is already in use", HttpStatus.CONFLICT );
 
-      return true
+      return true;
    }
 }

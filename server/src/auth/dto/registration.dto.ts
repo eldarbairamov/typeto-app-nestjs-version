@@ -4,16 +4,16 @@ export class RegistrationDto {
 
    @IsString()
    @IsNotEmpty()
-   readonly username: string
+   readonly username: string;
 
    @IsEmail()
    @IsNotEmpty()
-   readonly email: string
+   readonly email: string;
 
    @IsString()
    @MinLength( 6 )
    @MaxLength( 20 )
    @IsNotEmpty()
-   readonly password: string
+   readonly password: string;
 
 }

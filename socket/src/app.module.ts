@@ -1,7 +1,7 @@
 import { Module } from "@nestjs/common";
 import { EventsModule } from "./events/events.module";
 import { ConfigModule } from "@nestjs/config";
-import configuration from "./config/"
+import configuration from "./config/";
 import { SequelizeModule } from "@nestjs/sequelize";
 import { dbConfig } from "./config/db-config";
 
