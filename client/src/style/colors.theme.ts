@@ -16,19 +16,19 @@ export function useColorValues() {
 
    const ALERT_COLOR = "rgb(197,87,87)";
 
-   const BG = useColorModeValue("#eff0f3", "#2d303b");
+   const BG = useColorModeValue( "#eff0f3", "#2d303b" );
 
-   const BG_SECOND = useColorModeValue("white", "#24262f");
+   const BG_SECOND = useColorModeValue( "white", "#24262f" );
 
    const MESSAGE_OUTCOMING_COLOR = "#7e75c9";
 
    const MESSAGE_INCOMING_COLOR = "#dddbef";
 
-   const TEXT_AREA = useColorModeValue("#eff0f3", "#2d303b");
+   const TEXT_AREA = useColorModeValue( "#eff0f3", "#2d303b" );
 
-   const ICON_COLOR = useColorModeValue("blackAlpha.800", "whiteAlpha.800");
+   const ICON_COLOR = useColorModeValue( "blackAlpha.800", "whiteAlpha.800" );
 
-   const AVATAR_BORDER = "whiteAlpha.500";
+   const AVATAR_BORDER = "#dddbef";
 
    const WHITE_COLOR = "whiteAlpha.900";
 
@@ -38,13 +38,13 @@ export function useColorValues() {
 
    const BUTTON_HOVER_COLOR = "#555079";
 
-   const FONT_COLOR = useColorModeValue("blackAlpha.800", "whiteAlpha.800");
+   const FONT_COLOR = useColorModeValue( "blackAlpha.800", "whiteAlpha.800" );
 
-   const PLACEHOLDER_COLOR = useColorModeValue("blackAlpha.600", "whiteAlpha.600");
+   const PLACEHOLDER_COLOR = useColorModeValue( "blackAlpha.600", "whiteAlpha.600" );
 
-   const FONT_SECOND = useColorModeValue("blackAlpha.700", "whiteAlpha.700");
+   const FONT_SECOND = useColorModeValue( "blackAlpha.700", "whiteAlpha.700" );
 
-   const LOGO_COLOR = useColorModeValue("black", "whiteAlpha.900");
+   const LOGO_COLOR = useColorModeValue( "black", "whiteAlpha.900" );
 
    return {
       BG_SECOND,

@@ -1,9 +1,9 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Navigate } from "react-router-dom";
 import { Error } from "../component";
 import { UnauthorizedLayout } from "../layout";
 import { ForgotPasswordPage, LoginPage, RegistrationPage, ResetPasswordPage } from "../page";
 
-export const UnauthorizedRouter = createBrowserRouter([
+export const UnauthorizedRouter = createBrowserRouter( [
    {
       path: "/",
       element: <UnauthorizedLayout/>,
@@ -28,7 +28,15 @@ export const UnauthorizedRouter = createBrowserRouter([
             path: "reset_password/:token",
             element: <ResetPasswordPage/>
          },
+         {
+            path: "*",
+            element: <Navigate to={ "/" }/>,
+         },
       ],
       errorElement: <Error/>
    },
-]);
+   {
+      path: "*",
+      element: <Navigate to={ "/" }/>,
+   },
+] );

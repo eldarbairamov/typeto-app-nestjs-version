@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Navigate } from "react-router-dom";
 import { Error } from "../component";
 import { AuthorizedLayout } from "../layout";
 import { ChatsPage } from "../page";
@@ -13,6 +13,10 @@ export const AuthorizedRouter = createBrowserRouter([
             index: true,
             element: <ChatsPage/>
          },
+         {
+            path: "*",
+            element: <Navigate to={ "/" }/>,
+         },
       ],
       errorElement: <Error/>
    },
@@ -20,5 +24,9 @@ export const AuthorizedRouter = createBrowserRouter([
       path: "/unauthorized",
       element: <UnauthorizedPage/>,
       errorElement: <Error/>
-   }
+   },
+   {
+      path: "*",
+      element: <Navigate to={ "/" }/>,
+   },
 ]);

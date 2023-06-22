@@ -10,15 +10,15 @@ import { useColorValues } from "../../../constant";
 export function ContactsMenu( { isOnlyMessage, onModalClose }: { isOnlyMessage?: boolean, onModalClose: () => void } ) {
    const { value, handleChange } = useInputHandler();
 
-   const debounced = useDebounce(value);
+   const debounced = useDebounce( value );
 
-   const { contacts, isLoading } = useAppSelector(state => state.userReducer);
+   const { contacts, isLoading } = useAppSelector( state => state.userReducer );
 
-   getContactsService(debounced);
+   getContactsService( debounced );
 
    const { MAIN_COLOR, PLACEHOLDER_COLOR, ICON_COLOR, FONT_COLOR } = useColorValues();
 
-   if (isLoading) {
+   if ( isLoading ) {
       return (
           <Center h={ 500 }>
              <Spinner size={ "lg" } thickness={ "3px" } color={ MAIN_COLOR }/>
@@ -46,29 +46,37 @@ export function ContactsMenu( { isOnlyMessage, onModalClose }: { isOnlyMessage?:
 
           <Divider/>
 
-          { Boolean(contacts.length)
-              ? <VStack w={ "100%" }
-                        paddingTop={ 5 }
-                        spacing={ 5 }
-                        overflow={ "scroll" }>
-
-                 { contacts.map(user => <ContactItem key={ v4() }
-                                                     onModalClose={ onModalClose }
-                                                     user={ user }
-                                                     canDelete={ !isOnlyMessage }/>) }
-
-              </VStack>
-
-              : <Center w={ "100%" }
-                        h={ "100%" }>
-
-                 <Icon as={ RiUserSearchLine }
-                       boxSize={ "70px" }
-                       color={ ICON_COLOR }/>
-
+          { isLoading
+              ?
+              <Center h={ 500 }>
+                 <Spinner size={ "lg" } thickness={ "3px" } color={ MAIN_COLOR }/>
               </Center>
-          }
+              :
+              <>
+                 { Boolean( contacts.length )
+                     ? <VStack w={ "100%" }
+                               paddingTop={ 5 }
+                               spacing={ 5 }
+                               overflow={ "scroll" }>
 
+                        { contacts.map( user => <ContactItem key={ v4() }
+                                                             onModalClose={ onModalClose }
+                                                             user={ user }
+                                                             canDelete={ !isOnlyMessage }/> ) }
+
+                     </VStack>
+
+                     : <Center w={ "100%" }
+                               h={ "100%" }>
+
+                        <Icon as={ RiUserSearchLine }
+                              boxSize={ "70px" }
+                              color={ ICON_COLOR }/>
+
+                     </Center>
+                 }
+              </>
+          }
 
        </VStack>
    );

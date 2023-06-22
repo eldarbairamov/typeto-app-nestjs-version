@@ -13,7 +13,7 @@ export const messageApi = {
    },
 
    sendImage: async ( formData: FormData, conversationId: number ): Promise<AxiosPromise<IMessage>> => {
-      return await axiosInstance.post<IMessage>( `/messages/image/${ conversationId }`, formData );
+      return await axiosInstance.post<IMessage>( `/messages/${ conversationId }/image`, formData );
    },
 
    deleteMessage: async ( messageId: number, conversationId: number ): Promise<AxiosPromise<IMessage>> => {

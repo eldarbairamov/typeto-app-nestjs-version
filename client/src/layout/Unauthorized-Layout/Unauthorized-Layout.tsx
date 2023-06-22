@@ -6,7 +6,7 @@ import { FaLightbulb, FaRegLightbulb } from "react-icons/all";
 import { useColorValues } from "../../style/colors.theme.ts";
 
 export function UnauthorizedLayout() {
-   const { actionMessage, actionType } = useAppSelector(state => state.appReducer);
+   const { actionMessage, actionType } = useAppSelector( state => state.appReducer );
 
    const { colorMode, toggleColorMode } = useColorMode();
 

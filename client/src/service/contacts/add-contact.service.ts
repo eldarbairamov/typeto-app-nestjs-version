@@ -6,10 +6,10 @@ export const addContactService = ( user: IUser, setIsAdded: TypedSetState<boolea
    const dispatch = useAppDispatch();
 
    const addContact = async () => {
-      const result = await dispatch(userAsyncActions.addContact({ targetId: user.id }));
+      const result = await dispatch( userAsyncActions.addContact( { targetId: user.id } ) );
 
-      if (userAsyncActions.addContact.fulfilled.match(result)) {
-         setIsAdded(true);
+      if ( userAsyncActions.addContact.fulfilled.match( result ) ) {
+         setIsAdded( true );
       }
 
    };

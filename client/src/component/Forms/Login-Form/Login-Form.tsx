@@ -10,21 +10,21 @@ import { AppFormControl, AppFormControlPass } from "../../UI";
 import { useColorValues } from "../../../constant";
 
 export function LoginForm() {
-   const { isLoading } = useAppSelector(state => state.authReducer);
+   const { isLoading } = useAppSelector( state => state.authReducer );
 
-   const { register, handleSubmit, formState: { errors, isValid } } = useForm<ILoginForm>({
-      resolver: joiResolver(loginValidator),
+   const { register, handleSubmit, formState: { errors, isValid } } = useForm<ILoginForm>( {
+      resolver: joiResolver( loginValidator ),
       mode: "onTouched",
-   });
+   } );
 
    const dispatch = useAppDispatch();
 
-   const onSubmit: SubmitHandler<ILoginForm> = async ( data: ILoginForm ) => dispatch(authAsyncActions.login({ body: data }));
+   const onSubmit: SubmitHandler<ILoginForm> = async ( data: ILoginForm ) => dispatch( authAsyncActions.login( { body: data } ) );
 
    const { BUTTON_COLOR, BUTTON_HOVER_COLOR, MAIN_COLOR, BG_SECOND, WHITE_COLOR } = useColorValues();
 
    return (
-       <form onSubmit={ handleSubmit(onSubmit) } noValidate={ true }>
+       <form onSubmit={ handleSubmit( onSubmit ) } noValidate={ true }>
 
           <VStack p={ "50px" }
                   alignItems={ "stretch" }
@@ -66,13 +66,13 @@ export function LoginForm() {
 
                    <Button variant={ "unstyled" }
                            color={ MAIN_COLOR }
-                           onClick={ () => UnauthorizedRouter.navigate(UnauthorizedRoutesEnum.RegistrationPage) }>
+                           onClick={ () => UnauthorizedRouter.navigate( UnauthorizedRoutesEnum.RegistrationPage ) }>
                       Немає аккаунту
                    </Button>
 
                    <Button variant={ "unstyled" }
                            color={ MAIN_COLOR }
-                           onClick={ () => UnauthorizedRouter.navigate(UnauthorizedRoutesEnum.ForgotPasswordPage) }>
+                           onClick={ () => UnauthorizedRouter.navigate( UnauthorizedRoutesEnum.ForgotPasswordPage ) }>
                       Забув пароль?
                    </Button>
 

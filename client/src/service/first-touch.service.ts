@@ -20,7 +20,9 @@ export const firstTouchService = () => {
    }, []);
 
    useEffect(() => {
-      if (Object.keys(currentUserInfo).length) getConversations();
+      if (Object.keys(currentUserInfo).length) {
+         getConversations();
+      }
    }, [ searchKey, currentUserInfo, limit ]);
 
 };
