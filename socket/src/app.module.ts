@@ -12,7 +12,7 @@ import { dbConfig } from "./config/db-config";
          load: [ configuration ],
          isGlobal: true,
       } ),
-      SequelizeModule.forRoot( dbConfig ),
+      SequelizeModule.forRoot( dbConfig() ),
       EventsModule
    ],
    providers: [],

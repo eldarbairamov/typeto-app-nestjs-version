@@ -2,7 +2,7 @@ import { SequelizeModuleOptions } from "@nestjs/sequelize";
 import { ContactModel, ConversationModel, ConversationUserModel, MessageModel, UserModel } from "../events/model";
 import configuration from "../config";
 
-export const dbConfig: SequelizeModuleOptions = {
+export const dbConfig = (): SequelizeModuleOptions => ({
    dialect: "postgres",
    host: configuration().POSTGRES_HOST,
    port: Number( configuration().POSTGRES_PORT ),
@@ -12,4 +12,4 @@ export const dbConfig: SequelizeModuleOptions = {
    autoLoadModels: true,
    logging: false,
    models: [ ContactModel, ConversationModel, ConversationUserModel, MessageModel, UserModel ],
-};
+});

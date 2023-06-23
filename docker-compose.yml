@@ -2,7 +2,7 @@ version: "3"
 
 services:
   api:
-    container_name: api-nestjs
+    container_name: api_nestjs
     build: ./server
     command: npm run start:prod
     ports:
@@ -18,7 +18,7 @@ services:
       - db
 
   db:
-    container_name: postgres-db-nestjs
+    container_name: postgres_db_nestjs
     image: postgres:15.3-alpine
     env_file:
       - server/.env
@@ -29,7 +29,7 @@ services:
     restart: unless-stopped
 
   socket:
-    container_name: socket-nestjs
+    container_name: socket_nestjs
     build: ./socket
     command: npm run start:prod
     env_file:
@@ -43,7 +43,7 @@ services:
       - db
 
   nginx:
-    container_name: nginx-nestjs
+    container_name: nginx_nestjs
     image: nginx
     restart: unless-stopped
     ports:

@@ -5,7 +5,7 @@ import { ConversationModel, ConversationUserModel } from "../conversation/model"
 import { ActionTokenModel, OAuthModel } from "../auth/model";
 import configuration from "../config";
 
-export const dbConfig: SequelizeModuleOptions = {
+export const dbConfig = (): SequelizeModuleOptions => ({
    dialect: "postgres",
    host: configuration().POSTGRES_HOST,
    port: Number( configuration().POSTGRES_PORT ),
@@ -23,4 +23,4 @@ export const dbConfig: SequelizeModuleOptions = {
       ConversationUserModel,
       ContactModel
    ],
-};
+});

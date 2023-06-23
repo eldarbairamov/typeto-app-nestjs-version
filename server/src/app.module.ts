@@ -17,7 +17,7 @@ import path from "node:path";
          load: [ configuration ],
          envFilePath: ".env"
       } ),
-      SequelizeModule.forRoot( dbConfig ),
+      SequelizeModule.forRoot( dbConfig() ),
       ServeStaticModule.forRoot( { rootPath: path.join( process.cwd(), "client" ) } ),
       UserModule,
       MessageModule,
