@@ -13,26 +13,26 @@ interface IToastProps {
 }
 
 export function Toast( { actionMessage, actionType }: IToastProps ) {
-   const { isToastIsClosed } = useAppSelector(state => state.appReducer);
+   const { isToastIsClosed } = useAppSelector( state => state.appReducer );
 
    const toast = useToast();
 
-   const buttonRef = useRef<HTMLButtonElement>(null);
+   const buttonRef = useRef<HTMLButtonElement>( null );
 
    const dispatch = useAppDispatch();
 
-   useEffect(() => {
-      if (actionMessage?.length) {
-         dispatch(appActions.setIsToastClosed(false));
+   useEffect( () => {
+      if ( actionMessage?.length ) {
+         dispatch( appActions.setIsToastClosed( false ) );
          buttonRef.current?.click();
       }
-   }, [ actionMessage ]);
+   }, [ actionMessage ] );
 
    const { MAIN_COLOR, ALERT_COLOR } = useColorValues();
 
-   useEffect(() => {
+   useEffect( () => {
       isToastIsClosed && toast.closeAll();
-   }, [ isToastIsClosed ]);
+   }, [ isToastIsClosed ] );
 
    const options: Omit<UseToastOptions, "id"> = {
       render: () => (
@@ -68,7 +68,7 @@ export function Toast( { actionMessage, actionType }: IToastProps ) {
 
    const activateToast = () => {
       toast.closeAll();
-      toast(options);
+      toast( options );
    };
 
    return (
@@ -76,10 +76,10 @@ export function Toast( { actionMessage, actionType }: IToastProps ) {
                style={ { display: "none" } }
                onClick={ () => {
                   activateToast();
-                  setTimeout(() => {
+                  setTimeout( () => {
                      toast.closeAll();
-                     dispatch(appActions.setActionMessage({ message: undefined }));
-                  }, 2000);
+                     dispatch( appActions.setActionMessage( { message: undefined } ) );
+                  }, 2000 );
                } }>
        </Button>
    );

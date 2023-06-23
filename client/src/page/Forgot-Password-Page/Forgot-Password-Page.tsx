@@ -9,18 +9,18 @@ import { UnauthorizedRouter, UnauthorizedRoutesEnum } from "../../router";
 import { useColorValues } from "../../constant";
 
 export function ForgotPasswordPage() {
-   const { isLoading } = useAppSelector(state => state.authReducer);
+   const { isLoading } = useAppSelector( state => state.authReducer );
 
-   const { register, handleSubmit, formState: { errors, isValid } } = useForm<{ email: string }>({
-      resolver: joiResolver(emailValidator),
+   const { register, handleSubmit, formState: { errors, isValid } } = useForm<{ email: string }>( {
+      resolver: joiResolver( emailValidator ),
       mode: "onTouched",
-   });
+   } );
 
    const dispatch = useAppDispatch();
 
    const onSubmit: SubmitHandler<{ email: string }> = async ( data: { email: string } ) => {
-      await dispatch(authAsyncActions.forgotPassword({ email: data.email }));
-      UnauthorizedRouter.navigate(UnauthorizedRoutesEnum.LoginPage);
+      await dispatch( authAsyncActions.forgotPassword( { email: data.email } ) );
+      UnauthorizedRouter.navigate( UnauthorizedRoutesEnum.LoginPage );
    };
 
    const { BUTTON_COLOR, BUTTON_HOVER_COLOR, MAIN_COLOR, FONT_SECOND, BG_SECOND, WHITE_COLOR } = useColorValues();
@@ -44,7 +44,7 @@ export function ForgotPasswordPage() {
                 Введіть адресу електронної пошти вашого аккаунту і ми пришлемо вам посилання на скидання пароля
              </Text>
 
-             <form onSubmit={ handleSubmit(onSubmit) } noValidate={ true }>
+             <form onSubmit={ handleSubmit( onSubmit ) } noValidate={ true }>
 
                 <VStack alignItems={ "stretch" }
                         spacing={ 0 }

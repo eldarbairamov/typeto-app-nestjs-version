@@ -27,26 +27,26 @@ const getMessages = createAsyncThunk<IMessage[], { conversationId: number }, { r
     "message/getMessages",
     async ( { conversationId }, { rejectWithValue } ) => {
        try {
-          const { data } = await messageApi.getMessages(conversationId);
+          const { data } = await messageApi.getMessages( conversationId );
           return data;
 
        }
-       catch (e) {
-          return rejectWithValue(errorCatcherFn(e));
+       catch ( e ) {
+          return rejectWithValue( errorCatcherFn( e ) );
        }
 
-    });
+    } );
 
 const sendMessage = createAsyncThunk<IMessage, { content: string, conversationId: number }, { rejectValue: string }>(
     "message/sendMessage",
     async ( { content, conversationId }, { rejectWithValue } ) => {
        try {
-          const { data } = await messageApi.sendMessage(conversationId, content);
+          const { data } = await messageApi.sendMessage( conversationId, content );
           return data;
 
        }
-       catch (e) {
-          return rejectWithValue(errorCatcherFn(e));
+       catch ( e ) {
+          return rejectWithValue( errorCatcherFn( e ) );
        }
     }
 );
@@ -55,12 +55,12 @@ const deleteMessage = createAsyncThunk<IMessage, { messageId: number, conversati
     "message/deleteMessage",
     async ( { messageId, conversationId }, { rejectWithValue } ) => {
        try {
-          const { data } = await messageApi.deleteMessage(messageId, conversationId);
+          const { data } = await messageApi.deleteMessage( messageId, conversationId );
           return data;
 
        }
-       catch (e) {
-          return rejectWithValue(errorCatcherFn(e));
+       catch ( e ) {
+          return rejectWithValue( errorCatcherFn( e ) );
        }
     }
 );
@@ -69,23 +69,23 @@ const sendImage = createAsyncThunk<IMessage, { formData: FormData, conversationI
     "message/sendImage",
     async ( { formData, conversationId }, { rejectWithValue } ) => {
        try {
-          const { data } = await messageApi.sendImage(formData, conversationId);
+          const { data } = await messageApi.sendImage( formData, conversationId );
           return data;
        }
-       catch (e) {
-          return rejectWithValue(errorCatcherFn(e));
+       catch ( e ) {
+          return rejectWithValue( errorCatcherFn( e ) );
        }
     }
 );
 
 
-const messageSlice = createSlice({
+const messageSlice = createSlice( {
    name: "message",
    initialState,
    reducers: {
 
       addMessage: ( state, { payload }: PayloadAction<IMessage> ) => {
-         state.messages.push(payload);
+         state.messages.push( payload );
       },
 
       resetMessages: ( state ) => {
@@ -93,9 +93,9 @@ const messageSlice = createSlice({
       },
 
       deleteMessage: ( state, { payload }: PayloadAction<number> ) => {
-         const target = state.messages.find(m => m.id === payload);
-         const targetIndex = state.messages.indexOf(target!);
-         state.messages.splice(targetIndex, 1);
+         const target = state.messages.find( m => m.id === payload );
+         const targetIndex = state.messages.indexOf( target! );
+         state.messages.splice( targetIndex, 1 );
       },
 
       resetMessagesLength: ( state ) => {
@@ -109,67 +109,67 @@ const messageSlice = createSlice({
    },
    extraReducers: ( builder ) => builder
 
-       .addCase(getMessages.pending, ( state ) => {
+       .addCase( getMessages.pending, ( state ) => {
           state.isMessagesLoading = true;
-       })
-       .addCase(getMessages.fulfilled, ( state, { payload } ) => {
+       } )
+       .addCase( getMessages.fulfilled, ( state, { payload } ) => {
           state.messages = payload;
           state.isMessagesLoading = false;
           state.prevMessagesLength = payload.length;
-       })
-       .addCase(getMessages.rejected, ( state, { payload } ) => {
+       } )
+       .addCase( getMessages.rejected, ( state, { payload } ) => {
           state.errorMessage = payload;
           state.isMessagesLoading = false;
-       })
+       } )
 
        // *************** //
 
-       .addCase(sendMessage.pending, ( state ) => {
+       .addCase( sendMessage.pending, ( state ) => {
           state.isMessageSending = true;
-       })
+       } )
 
-       .addCase(sendMessage.fulfilled, ( state, { payload } ) => {
+       .addCase( sendMessage.fulfilled, ( state, { payload } ) => {
           state.isNewMessageAdded = true;
           state.isMessageSending = false;
-          state.messages.push(payload);
+          state.messages.push( payload );
           state.prevMessagesLength = state.messages.length;
-       })
+       } )
 
-       .addCase(sendMessage.rejected, ( state, { payload } ) => {
+       .addCase( sendMessage.rejected, ( state, { payload } ) => {
           state.errorMessage = payload;
           state.isMessageSending = false;
-       })
+       } )
 
        // *************** //
 
-       .addCase(sendImage.pending, ( state ) => {
+       .addCase( sendImage.pending, ( state ) => {
           state.isImageSending = true;
-       })
+       } )
 
-       .addCase(sendImage.fulfilled, ( state, { payload } ) => {
+       .addCase( sendImage.fulfilled, ( state, { payload } ) => {
           state.isImageSending = false;
-          state.messages.push(payload);
-       })
+          state.messages.push( payload );
+       } )
 
-       .addCase(sendImage.rejected, ( state, { payload } ) => {
+       .addCase( sendImage.rejected, ( state, { payload } ) => {
           state.isImageSending = false;
           state.errorMessage = payload;
-       })
+       } )
 
        // *************** //
 
-       .addCase(deleteMessage.pending, ( state ) => {
+       .addCase( deleteMessage.pending, ( state ) => {
           state.isNewMessageAdded = false;
-       })
+       } )
 
-       .addCase(deleteMessage.fulfilled, ( state, { meta } ) => {
-          const target = state.messages.find(m => m.id === meta.arg.messageId);
-          const targetIndex = state.messages.indexOf(target!);
-          state.messages.splice(targetIndex, 1);
-       })
+       .addCase( deleteMessage.fulfilled, ( state, { meta } ) => {
+          const target = state.messages.find( m => m.id === meta.arg.messageId );
+          const targetIndex = state.messages.indexOf( target! );
+          state.messages.splice( targetIndex, 1 );
+       } )
 
 
-});
+} );
 
 export const messageAsyncActions = { getMessages, sendMessage, sendImage, deleteMessage };
 export const messageActions = messageSlice.actions;

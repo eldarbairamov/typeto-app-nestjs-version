@@ -1,12 +1,12 @@
 import { type AxiosApiError } from "../service";
 
-export const errorCatcherFn = ( e: unknown) => {
+export const errorCatcherFn = ( e: unknown ) => {
    const axiosError = e as AxiosApiError;
    const response = axiosError.response?.data.message;
 
    let message;
 
-   switch (response) {
+   switch ( response ) {
 
       case "This email is already in use":
          message = "Користувач з такою електронною поштою вже існує";

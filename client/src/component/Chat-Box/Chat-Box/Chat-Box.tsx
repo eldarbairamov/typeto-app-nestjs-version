@@ -5,9 +5,9 @@ import { MessageList, ChatBoxBottom, ChatBoxHeader } from "../../../component";
 import { useColorValues } from "../../../constant";
 
 export function ChatBox() {
-   const { activeConversation, conversations } = useAppSelector(state => state.conversationReducer);
+   const { activeConversation, conversations } = useAppSelector( state => state.conversationReducer );
 
-   getMessageService(activeConversation);
+   getMessageService( activeConversation );
 
    const { BG_SECOND } = useColorValues();
 
@@ -17,7 +17,7 @@ export function ChatBox() {
                justify={ "space-between" }
                h={ "100%" }>
 
-          { Boolean(conversations.length) &&
+          { Boolean( conversations.length ) &&
               <VStack h={ "100%" }
                       borderRadius={ "0 20px 20px 0" }
                       w={ "100%" }
@@ -25,17 +25,17 @@ export function ChatBox() {
                       bg={ BG_SECOND }
                       spacing={ 0 }>
 
-                <ChatBoxHeader/>
+                  <ChatBoxHeader/>
 
-                <VStack h={ calc("100%").subtract("60px").toString() }
-                        w={ "100%" }
-                        spacing={ 0 }>
+                  <VStack h={ calc( "100%" ).subtract( "60px" ).toString() }
+                          w={ "100%" }
+                          spacing={ 0 }>
 
-                  <MessageList/>
+                      <MessageList/>
 
-                  <ChatBoxBottom/>
+                      <ChatBoxBottom/>
 
-                </VStack>
+                  </VStack>
 
               </VStack>
           }

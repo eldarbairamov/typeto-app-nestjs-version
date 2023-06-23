@@ -14,15 +14,15 @@ interface IUserItemProps {
 }
 
 export function UserItem( { user, onModalClose }: IUserItemProps ) {
-   const [ isAdded, setIsAdded ] = useState<boolean>(user.isAlreadyAdded);
+   const [ isAdded, setIsAdded ] = useState<boolean>( user.isAlreadyAdded );
 
-   const { onlineContactsIds } = useAppSelector(state => state.userReducer);
+   const { onlineContactsIds } = useAppSelector( state => state.userReducer );
 
-   const { currentUserInfo } = useAppSelector(state => state.userReducer);
+   const { currentUserInfo } = useAppSelector( state => state.userReducer );
 
-   const { addContact } = addContactService(user, setIsAdded);
+   const { addContact } = addContactService( user, setIsAdded );
 
-   const { createConversation } = createConversationService(user, onModalClose);
+   const { createConversation } = createConversationService( user, onModalClose );
 
    const { FONT_COLOR, ICON_COLOR, AVATAR_BORDER, MAIN_COLOR } = useColorValues();
 
@@ -37,10 +37,10 @@ export function UserItem( { user, onModalClose }: IUserItemProps ) {
                      ignoreFallback={ true }
                      showBorder={ true }
                      borderColor={ AVATAR_BORDER }
-                     src={ getImageUrl(user.image, user.email) }
+                     src={ getImageUrl( user.image, user.email ) }
                      size={ "md" }>
 
-                { onlineContactsIds.includes(user.id) &&
+                { onlineContactsIds.includes( user.id ) &&
                     <AvatarBadge boxSize={ 5 }
                                  borderColor={ "white" }
                                  bg={ MAIN_COLOR }/>
@@ -55,13 +55,13 @@ export function UserItem( { user, onModalClose }: IUserItemProps ) {
           <HStack spacing={ 1 }>
 
              <ButtonIcon size={ "25px" }
-                         p={0}
+                         p={ 0 }
                          as={ currentUserInfo.id === user.id ? undefined : AiOutlineMessage }
                          color={ ICON_COLOR }
                          fn={ createConversation }/>
 
              <ButtonIcon size={ "25px" }
-                         p={0}
+                         p={ 0 }
                          as={ currentUserInfo.id === user.id ? undefined : isAdded ? FiUserCheck : FiUserPlus }
                          cursor={ isAdded ? "default" : "pointer" }
                          color={ ICON_COLOR }

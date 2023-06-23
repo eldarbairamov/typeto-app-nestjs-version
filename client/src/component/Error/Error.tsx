@@ -7,7 +7,7 @@ import { useColorValues } from "../../style/colors.theme.ts";
 export function Error() {
    const error = useRouteError();
 
-   console.log(error);
+   console.log( error );
 
    const { FONT_COLOR, BG, MAIN_COLOR } = useColorValues();
 

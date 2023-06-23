@@ -21,14 +21,14 @@ const initialState: IInitialState = {
    isToastIsClosed: false
 };
 
-export const appSlice = createSlice({
+export const appSlice = createSlice( {
    name: "app",
    initialState,
    reducers: {
 
       setActionMessage: ( state, { payload }: PayloadAction<{ message: string | undefined, type?: "info" | "error" | "loading" }> ) => {
          state.actionMessage = payload.message;
-         if (payload.type) state.actionType = payload.type;
+         if ( payload.type ) state.actionType = payload.type;
       },
 
       setIsImTyping: ( state, { payload }: PayloadAction<boolean> ) => {
@@ -44,7 +44,7 @@ export const appSlice = createSlice({
       }
 
    }
-});
+} );
 
 export const appActions = appSlice.actions;
 export const appReducer = appSlice.reducer;

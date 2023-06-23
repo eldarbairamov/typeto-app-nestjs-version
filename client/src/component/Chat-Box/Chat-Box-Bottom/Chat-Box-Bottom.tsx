@@ -10,13 +10,13 @@ import { useColorValues } from "../../../constant";
 export function ChatBoxBottom() {
    const { value, handleChange, setValue } = useInputHandler();
 
-   const ref = useRef<HTMLInputElement>(null);
+   const ref = useRef<HTMLInputElement>( null );
 
    const handlePick = () => ref.current?.click();
 
-   const { sendImage, sendMessage, onEnterDown } = sendMessageService(setValue, value);
+   const { sendImage, sendMessage, onEnterDown } = sendMessageService( setValue, value );
 
-   const { whoIsTyping } = useAppSelector(state => state.appReducer);
+   const { whoIsTyping } = useAppSelector( state => state.appReducer );
 
    const { TEXT_AREA, PLACEHOLDER_COLOR, MAIN_COLOR, BLACK_COLOR, MAIN_COLOR_SUPER_LIGHT2 } = useColorValues();
 
@@ -29,22 +29,22 @@ export function ChatBoxBottom() {
               <VStack position={ "absolute" }
                       bg={ MAIN_COLOR_SUPER_LIGHT2 }
                       rounded={ 10 }
-                      padding={ '10px 14px' }
+                      padding={ "10px 14px" }
                       bottom={ 100 }>
 
-                <HStack spacing={ 1 }>
-                  <Text fontWeight={ "bold" }
-                        fontSize={ 13 }
-                        color={ MAIN_COLOR }>
-                     { whoIsTyping.username }
-                  </Text>
+                  <HStack spacing={ 1 }>
+                      <Text fontWeight={ "bold" }
+                            fontSize={ 13 }
+                            color={ MAIN_COLOR }>
+                         { whoIsTyping.username }
+                      </Text>
 
-                  <Text fontSize={ 13 }
-                        color={ BLACK_COLOR }
-                        fontStyle={ "italic" }>
-                    щось друкує...
-                  </Text>
-                </HStack>
+                      <Text fontSize={ 13 }
+                            color={ BLACK_COLOR }
+                            fontStyle={ "italic" }>
+                          щось друкує...
+                      </Text>
+                  </HStack>
 
               </VStack>
           }

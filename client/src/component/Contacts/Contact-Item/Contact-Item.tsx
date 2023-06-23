@@ -16,15 +16,15 @@ interface IUserItemProps {
 }
 
 export function ContactItem( { user, canDelete, onModalClose, isOnlyForAdding }: IUserItemProps ) {
-   const { onlineContactsIds } = useAppSelector(state => state.userReducer);
+   const { onlineContactsIds } = useAppSelector( state => state.userReducer );
 
    const dispatch = useAppDispatch();
 
-   const { createConversation } = createConversationService(user, onModalClose);
+   const { createConversation } = createConversationService( user, onModalClose );
 
    const addContactToGroup = () => {
-      dispatch(conversationActions.addContactToGroup(user));
-      dispatch(userActions.groupModeMove({ id: user.id, action: "add" }));
+      dispatch( conversationActions.addContactToGroup( user ) );
+      dispatch( userActions.groupModeMove( { id: user.id, action: "add" } ) );
    };
 
    const { AVATAR_BORDER, ICON_COLOR, MAIN_COLOR, FONT_COLOR } = useColorValues();
@@ -41,10 +41,10 @@ export function ContactItem( { user, canDelete, onModalClose, isOnlyForAdding }:
                      ignoreFallback={ true }
                      showBorder={ true }
                      borderColor={ AVATAR_BORDER }
-                     src={ getImageUrl(user.image, user.email) }
+                     src={ getImageUrl( user.image, user.email ) }
                      size={ "md" }>
 
-                { onlineContactsIds.includes(user.id) &&
+                { onlineContactsIds.includes( user.id ) &&
                     <AvatarBadge boxSize={ 4 }
                                  borderColor={ "white" }
                                  bg={ MAIN_COLOR }/>
@@ -62,15 +62,15 @@ export function ContactItem( { user, canDelete, onModalClose, isOnlyForAdding }:
           <HStack spacing={ 1 }>
 
              <ButtonIcon size={ isOnlyForAdding ? "29px" : "25px" }
-                         p={0}
+                         p={ 0 }
                          fn={ isOnlyForAdding ? addContactToGroup : createConversation }
                          color={ ICON_COLOR }
                          as={ isOnlyForAdding ? AiOutlineUsergroupAdd : AiOutlineMessage }/>
 
              { canDelete &&
                  <ButtonIcon size={ "25px" }
-                             p={0}
-                             fn={ () => dispatch(userAsyncActions.deleteContact({ contactId: user.id })) }
+                             p={ 0 }
+                             fn={ () => dispatch( userAsyncActions.deleteContact( { contactId: user.id } ) ) }
                              color={ ICON_COLOR }
                              as={ AiOutlineDelete }/>
              }

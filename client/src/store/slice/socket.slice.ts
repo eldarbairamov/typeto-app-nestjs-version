@@ -9,8 +9,8 @@ const initialState: IInitialState = {
    connect: ConnectionType.Disconnect
 };
 
-export const socketSlice = createSlice({
-   name: 'socket',
+export const socketSlice = createSlice( {
+   name: "socket",
    initialState,
    reducers: {
 
@@ -23,7 +23,7 @@ export const socketSlice = createSlice({
       }
 
    }
-});
+} );
 
 export const socketActions = socketSlice.actions;
 export const socketReducer = socketSlice.reducer;

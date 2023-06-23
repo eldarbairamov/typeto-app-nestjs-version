@@ -10,26 +10,26 @@ import { AppFormControl, AppFormControlPass } from "../../UI";
 import { useColorValues } from "../../../constant";
 
 export function RegistrationForm() {
-   const { isLoading } = useAppSelector(state => state.authReducer);
+   const { isLoading } = useAppSelector( state => state.authReducer );
 
-   const { register, handleSubmit, formState: { errors, isValid } } = useForm<IRegistrationForm>({
-      resolver: joiResolver(registrationValidator),
+   const { register, handleSubmit, formState: { errors, isValid } } = useForm<IRegistrationForm>( {
+      resolver: joiResolver( registrationValidator ),
       mode: "onTouched",
-   });
+   } );
 
    const dispatch = useAppDispatch();
 
    const onSubmit: SubmitHandler<IRegistrationForm> = async ( data: IRegistrationForm ) => {
-      const result = await dispatch(authAsyncActions.registration({ data }));
-      if (authAsyncActions.registration.fulfilled.match(result)) {
-         UnauthorizedRouter.navigate(UnauthorizedRoutesEnum.LoginPage);
+      const result = await dispatch( authAsyncActions.registration( { data } ) );
+      if ( authAsyncActions.registration.fulfilled.match( result ) ) {
+         UnauthorizedRouter.navigate( UnauthorizedRoutesEnum.LoginPage );
       }
    };
 
    const { BUTTON_COLOR, BUTTON_HOVER_COLOR, BG_SECOND } = useColorValues();
 
    return (
-       <form onSubmit={ handleSubmit(onSubmit) }
+       <form onSubmit={ handleSubmit( onSubmit ) }
              noValidate={ true }>
 
           <VStack p={ "50px" }
@@ -77,7 +77,7 @@ export function RegistrationForm() {
 
                 <Button variant={ "unstyled" }
                         color={ BUTTON_COLOR }
-                        onClick={ () => UnauthorizedRouter.navigate(UnauthorizedRoutesEnum.LoginPage) }>
+                        onClick={ () => UnauthorizedRouter.navigate( UnauthorizedRoutesEnum.LoginPage ) }>
                    Увійти
                 </Button>
 

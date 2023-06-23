@@ -5,9 +5,9 @@ import { Header, Toast } from "../../component";
 import { useAppSelector } from "../../hook";
 
 export function AuthorizedLayout() {
-   const [ isHeight800 ] = useMediaQuery("(max-height: 800px)");
+   const [ isHeight800 ] = useMediaQuery( "(max-height: 800px)" );
 
-   const { actionMessage, actionType } = useAppSelector(state => state.appReducer);
+   const { actionMessage, actionType } = useAppSelector( state => state.appReducer );
 
    firstTouchService();
 

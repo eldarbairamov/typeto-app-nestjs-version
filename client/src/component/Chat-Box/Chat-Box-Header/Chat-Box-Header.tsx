@@ -6,7 +6,7 @@ import { ChatBoxOptions } from "../../../component";
 import { useColorValues } from "../../../constant";
 
 export function ChatBoxHeader() {
-   const { activeConversation } = useAppSelector(state => state.conversationReducer);
+   const { activeConversation } = useAppSelector( state => state.conversationReducer );
 
    const { FONT_COLOR, AVATAR_BORDER } = useColorValues();
 
@@ -22,13 +22,13 @@ export function ChatBoxHeader() {
              { activeConversation.isGroupConversation
 
                  ? <AvatarGroup size={ "sm" }>
-                    { activeConversation.users.map(user =>
+                    { activeConversation.users.map( user =>
                         <Avatar key={ v4() }
                                 name={ user.username }
                                 showBorder={ true }
                                 borderColor={ AVATAR_BORDER }
                                 ignoreFallback={ true }
-                                src={ getImageUrl(user.image, user.email) }
+                                src={ getImageUrl( user.image, user.email ) }
                                 size={ "sm" }/>
                     ) }
                  </AvatarGroup>
@@ -37,7 +37,7 @@ export function ChatBoxHeader() {
                            ignoreFallback={ true }
                            showBorder={ true }
                            borderColor={ AVATAR_BORDER }
-                           src={ getImageUrl(activeConversation.conversationWith[0].image, activeConversation.conversationWith[0].email) }
+                           src={ getImageUrl( activeConversation.conversationWith[0].image, activeConversation.conversationWith[0].email ) }
                            size={ "sm" }/>
 
              }

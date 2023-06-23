@@ -12,28 +12,28 @@ import { getImageUrl } from "../../../helper";
 import { useColorValues } from "../../../constant";
 
 export function GroupConversationMenu( { isOnlyMessage, onModalClose }: { isOnlyMessage?: boolean, onModalClose: () => void } ) {
-   const { groupMembers } = useAppSelector(state => state.conversationReducer);
+   const { groupMembers } = useAppSelector( state => state.conversationReducer );
 
-   const { contacts, isLoading } = useAppSelector(state => state.userReducer);
+   const { contacts, isLoading } = useAppSelector( state => state.userReducer );
 
-   const [ values, setValues ] = useState<{ searchValue: string, groupName: string }>({
+   const [ values, setValues ] = useState<{ searchValue: string, groupName: string }>( {
       searchValue: "",
       groupName: ""
-   });
+   } );
 
    const handleChange = ( e: TypedOnChange, fieldName: string ) => {
-      setValues({
+      setValues( {
          ...values,
          [fieldName]: e.target.value
-      });
+      } );
    };
 
-   const ref = useRef<HTMLButtonElement>(null);
+   const ref = useRef<HTMLButtonElement>( null );
 
-   const { createGroupConversation, deleteContactFromGroup } = groupConvMenuService(onModalClose, values);
+   const { createGroupConversation, deleteContactFromGroup } = groupConvMenuService( onModalClose, values );
 
    const onEnterDown = async ( e: React.KeyboardEvent<HTMLInputElement> ) => {
-      if (e.key === "Enter") {
+      if ( e.key === "Enter" ) {
          e.preventDefault();
          ref.current?.click();
       }
@@ -41,7 +41,7 @@ export function GroupConversationMenu( { isOnlyMessage, onModalClose }: { isOnly
 
    const { BUTTON_COLOR, BUTTON_HOVER_COLOR, MAIN_COLOR, AVATAR_BORDER, PLACEHOLDER_COLOR, WHITE_COLOR, FONT_COLOR } = useColorValues();
 
-   if (isLoading) {
+   if ( isLoading ) {
       return (
           <Center h={ 650 }>
              <Spinner size={ "lg" } thickness={ "3px" } color={ MAIN_COLOR }/>
@@ -56,7 +56,7 @@ export function GroupConversationMenu( { isOnlyMessage, onModalClose }: { isOnly
                   p={ 5 }
                   w={ "100%" }>
 
-             { Boolean(!groupMembers.length)
+             { Boolean( !groupMembers.length )
                  ? <Heading size={ "md" }
                             color={ FONT_COLOR }> Оберіть учасників </Heading>
 
@@ -65,15 +65,15 @@ export function GroupConversationMenu( { isOnlyMessage, onModalClose }: { isOnly
                              color={ FONT_COLOR }> Учасники </Heading>
 
                     <HStack>
-                       { groupMembers && groupMembers.map(member =>
+                       { groupMembers && groupMembers.map( member =>
                            <Avatar cursor={ "pointer" }
                                    key={ v4() }
                                    showBorder={ true }
                                    borderColor={ AVATAR_BORDER }
-                                   src={ getImageUrl(member.image, member.email) }
+                                   src={ getImageUrl( member.image, member.email ) }
                                    size={ "sm" }
                                    name={ member.username }
-                                   onClick={ () => deleteContactFromGroup(member) }/>
+                                   onClick={ () => deleteContactFromGroup( member ) }/>
                        ) }
                     </HStack>
                  </VStack>
@@ -88,7 +88,7 @@ export function GroupConversationMenu( { isOnlyMessage, onModalClose }: { isOnly
                 <Input border={ "none" }
                        value={ values.searchValue }
                        color={ FONT_COLOR }
-                       onChange={ ( e ) => handleChange(e, "searchValue") }
+                       onChange={ ( e ) => handleChange( e, "searchValue" ) }
                        _placeholder={ { color: PLACEHOLDER_COLOR } }
                        placeholder={ "знайти контакт" }/>
              </InputGroup>
@@ -101,11 +101,11 @@ export function GroupConversationMenu( { isOnlyMessage, onModalClose }: { isOnly
                         spacing={ 5 }
                         overflow={ "scroll" }>
 
-                 { contacts.map(user => <ContactItem key={ v4() }
-                                                     onModalClose={ onModalClose }
-                                                     isOnlyForAdding={ true }
-                                                     user={ user }
-                                                     canDelete={ !isOnlyMessage }/>) }
+                 { contacts.map( user => <ContactItem key={ v4() }
+                                                      onModalClose={ onModalClose }
+                                                      isOnlyForAdding={ true }
+                                                      user={ user }
+                                                      canDelete={ !isOnlyMessage }/> ) }
 
               </VStack>
 
@@ -130,7 +130,7 @@ export function GroupConversationMenu( { isOnlyMessage, onModalClose }: { isOnly
                     border={ "none" }
                     _focus={ { borderColor: "transparent" } }
                     value={ values.groupName }
-                    onChange={ ( e ) => handleChange(e, "groupName") }
+                    onChange={ ( e ) => handleChange( e, "groupName" ) }
                     textAlign={ "center" }
                     _placeholder={ { color: PLACEHOLDER_COLOR } }
                     placeholder={ "введіть назву бесіди" }/>

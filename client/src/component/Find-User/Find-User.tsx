@@ -11,17 +11,17 @@ import { RiUserSearchLine } from "react-icons/all";
 import { useColorValues } from "../../constant";
 
 export function FindUser( { onModalClose }: { onModalClose: () => void } ) {
-   const { userBySearch } = useAppSelector(state => state.userReducer);
+   const { userBySearch } = useAppSelector( state => state.userReducer );
 
    const dispatch = useAppDispatch();
 
    const { value, handleChange } = useInputHandler();
 
-   const { findUser } = findUserService(value);
+   const { findUser } = findUserService( value );
 
-   useEffect(() => {
-      dispatch(userActions.setUser({} as IUserBySearch));
-   }, []);
+   useEffect( () => {
+      dispatch( userActions.setUser( {} as IUserBySearch ) );
+   }, [] );
 
    const { BUTTON_COLOR, BUTTON_HOVER_COLOR, PLACEHOLDER_COLOR, FONT_COLOR, ICON_COLOR, WHITE_COLOR } = useColorValues();
 
@@ -61,7 +61,7 @@ export function FindUser( { onModalClose }: { onModalClose: () => void } ) {
 
           <Divider/>
 
-          { Object.keys(userBySearch).length
+          { Object.keys( userBySearch ).length
               ?
               <Center w={ "100%" }
                       h={ "100%" }>

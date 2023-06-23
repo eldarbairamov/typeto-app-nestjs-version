@@ -11,7 +11,7 @@ const theme: ThemeOverride = {
    styles: {
       global: ( props: any ) => ({
          body: {
-            bg: mode("#eff0f3", "#2d303b")(props),
+            bg: mode( "#eff0f3", "#2d303b" )( props ),
          },
          "*": {
             letterSpacing: -0.5,
@@ -55,4 +55,4 @@ const theme: ThemeOverride = {
    },
 };
 
-export const chakraTheme = extendTheme(theme);
+export const chakraTheme = extendTheme( theme );

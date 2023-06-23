@@ -5,7 +5,7 @@ import { useAppSelector } from "./hook";
 import { AuthorizedRouter, UnauthorizedRouter } from "./router";
 
 export function App() {
-   const { isLogin } = useAppSelector(state => state.authReducer);
+   const { isLogin } = useAppSelector( state => state.authReducer );
 
    return (
        <ChakraProvider theme={ chakraTheme }>

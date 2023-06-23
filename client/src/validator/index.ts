@@ -1,1 +1,1 @@
-export * from './auth.validator.ts'
+export * from "./auth.validator.ts";
