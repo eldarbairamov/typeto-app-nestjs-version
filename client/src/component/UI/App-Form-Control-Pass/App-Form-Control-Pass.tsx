@@ -18,7 +18,7 @@ export function AppFormControlPass( { labelName, fieldName, errorMessage, regist
    const { isShow, handleClick } = useHidePass();
 
    return (
-       <FormControl isInvalid={ Boolean(errorMessage) }
+       <FormControl isInvalid={ Boolean( errorMessage ) }
                     isRequired={ isRequired ? isRequired : false }
                     h={ 100 }>
 
@@ -26,7 +26,7 @@ export function AppFormControlPass( { labelName, fieldName, errorMessage, regist
 
           <InputGroup>
 
-             <Input { ...register(fieldName) }
+             <Input { ...register( fieldName ) }
                     autoComplete={ "" }
                     focusBorderColor={ MAIN_COLOR_LIGHTER }
                     color={ FONT_COLOR }
@@ -51,7 +51,7 @@ export function AppFormControlPass( { labelName, fieldName, errorMessage, regist
 
           </InputGroup>
 
-          <FormErrorMessage color={ "red.500" }>
+          <FormErrorMessage color={ ALERT_COLOR }>
              { errorMessage && errorMessage }
           </FormErrorMessage>
 
