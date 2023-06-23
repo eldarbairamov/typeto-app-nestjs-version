@@ -1,7 +1,7 @@
 import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/sequelize";
 import { UserModel } from "../user/model";
-import { EmailService } from "../common/service/email.service";
+import { EmailService } from "../common/service";
 import { ActionTokenModel, OAuthModel } from "./model";
 import { ConfigService } from "@nestjs/config";
 import { IEnvironment } from "../common/interface/env.inteface";

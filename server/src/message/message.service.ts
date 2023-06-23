@@ -4,7 +4,7 @@ import { MessageModel } from "./model/message.model";
 import { UserModel } from "../user/model";
 import { ConversationModel, ConversationUserModel } from "../conversation/model";
 import { Op } from "sequelize";
-import { ImageService } from "../common/service/image.service";
+import { ImageService } from "../common/service";
 
 @Injectable()
 export class MessageService {
@@ -17,7 +17,7 @@ export class MessageService {
    ) {
    }
 
-   async sendMessage( content: string, senderId: number, conversationId: number ) {
+   async sendMessage( content: string, senderId: number, conversationId: number ): Promise<MessageModel> {
       const newMessage = await this.messageModel.create( {
          content,
          senderId,
@@ -55,7 +55,7 @@ export class MessageService {
       return messageWithSender;
    }
 
-   async getMessages( conversationId: number, currentUserId: number ) {
+   async getMessages( conversationId: number, currentUserId: number ): Promise<MessageModel[]> {
       const [ messages ] = await Promise.all( [
          this.messageModel.findAll( {
             where: { conversationId },
@@ -82,7 +82,7 @@ export class MessageService {
       return messages;
    };
 
-   async sendImage( file: Express.Multer.File, senderId: number, conversationId: number ) {
+   async sendImage( file: Express.Multer.File, senderId: number, conversationId: number ): Promise<MessageModel> {
       const user = await this.userModel.findByPk( senderId );
 
       const { imageName } = await this.imageService.process( file, user.email );
@@ -125,7 +125,7 @@ export class MessageService {
       return messageWithSender;
    }
 
-   async deleteMessage( conversationId: number, messageId: number, currentUserId: number ) {
+   async deleteMessage( conversationId: number, messageId: number, currentUserId: number ): Promise<MessageModel> {
       const [ message, user ] = await Promise.all( [
          this.messageModel.findOne( {
             where: { conversationId, id: messageId },

@@ -1,7 +1,7 @@
 import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/sequelize";
 import { ContactModel, UserModel } from "./model";
-import { ImageService } from "../common/service/image.service";
+import { ImageService } from "../common/service";
 
 @Injectable()
 export class UserService {
@@ -12,7 +12,7 @@ export class UserService {
    ) {
    }
 
-   async findUser( userEmail: string, currentUserId: number ) {
+   async findUser( userEmail: string, currentUserId: number ): Promise<any> {
       const [ user, isAlreadyAdded ] = await Promise.all( [
          this.userModel.findOne( {
             where: {
@@ -32,13 +32,13 @@ export class UserService {
       return { ...user, isAlreadyAdded: Boolean( isAlreadyAdded ) };
    }
 
-   async getCurrentUser( currentUserId: number ) {
+   async getCurrentUser( currentUserId: number ): Promise<UserModel> {
       return await this.userModel.findByPk( currentUserId, {
          attributes: [ "id", "username", "email", "image" ]
       } );
    }
 
-   async uploadAvatar( file: Express.Multer.File, currentUserId: number ) {
+   async uploadAvatar( file: Express.Multer.File, currentUserId: number ): Promise<{ imageName: string }> {
       const user = await this.userModel.findByPk( currentUserId );
 
       user.image && await this.imageService.delete( user.image, user.email );
@@ -50,7 +50,7 @@ export class UserService {
       return { imageName };
    }
 
-   async deleteAvatar( currentUserId: number ) {
+   async deleteAvatar( currentUserId: number ): Promise<void> {
       const user = await this.userModel.findByPk( currentUserId );
 
       await this.imageService.delete( user.image, user.email );
@@ -58,7 +58,7 @@ export class UserService {
       await user?.update( { image: null }, { hooks: false } );
    }
 
-   async getContacts( searchKey: string, currentUserId: number ) {
+   async getContacts( searchKey: string, currentUserId: number ): Promise<UserModel[]> {
       return await this.userModel.findOne( {
          where: {
             id: currentUserId
@@ -74,14 +74,14 @@ export class UserService {
           } );
    }
 
-   async addContact( targetId: number, currentUserId: number ) {
+   async addContact( targetId: number, currentUserId: number ): Promise<void> {
       await this.contactModel.create( {
          userId: currentUserId!,
          contactId: targetId
       } );
    }
 
-   async deleteContact( contactId: number, currentUserId: number ) {
+   async deleteContact( contactId: number, currentUserId: number ): Promise<UserModel[]> {
       await this.contactModel.destroy( {
          where: {
             userId: currentUserId,

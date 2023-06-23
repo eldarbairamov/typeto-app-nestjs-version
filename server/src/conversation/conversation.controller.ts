@@ -6,6 +6,7 @@ import { User } from "../common/decorator";
 import { QueryDto } from "../common/dto/query.dto";
 import { IsConversationExists } from "./guard/is-conversation-exists.guard";
 import { CommonConversationQueryDto } from "./dto/common-conversation-query.dto";
+import { IConversationList } from "./interface/conversation.interface";
 
 @Controller( "conversations" )
 export class ConversationController {
@@ -17,8 +18,7 @@ export class ConversationController {
    @Post()
    async createConversation(
        @Body() dto: CreateConversationDto,
-       @User( "userId" ) userId: number
-   ) {
+       @User( "userId" ) userId: number ): Promise<any> {
       return this.conversationService.createConversation( dto.userIds, dto.conversationName, userId );
    }
 
@@ -26,8 +26,7 @@ export class ConversationController {
    @Get()
    async getConversations(
        @Query() dto: QueryDto,
-       @User( "userId" ) userId: number
-   ) {
+       @User( "userId" ) userId: number ): Promise<IConversationList> {
       if ( dto.searchKey ) return await this.conversationService.getConversationsBySearch( userId, dto.searchKey, dto.limit );
       else return this.conversationService.getConversations( userId, dto.limit );
    }
@@ -37,8 +36,7 @@ export class ConversationController {
    @Delete()
    async deleteConversation(
        @Query() dto: CommonConversationQueryDto,
-       @User( "userId" ) userId: number
-   ) {
+       @User( "userId" ) userId: number ): Promise<IConversationList> {
       return this.conversationService.deleteConversation( dto.conversationId, userId, dto.limit );
    }
 
@@ -47,8 +45,7 @@ export class ConversationController {
    @Delete( "admin" )
    async deleteGroupConversation(
        @Query() dto: CommonConversationQueryDto,
-       @User( "userId" ) userId: number
-   ) {
+       @User( "userId" ) userId: number ): Promise<IConversationList> {
       return this.conversationService.deleteGroupConversation( dto.conversationId, userId, dto.limit );
    }
 
@@ -65,8 +62,7 @@ export class ConversationController {
    @Delete( "leave" )
    async leaveGroupConversation(
        @Query() dto: CommonConversationQueryDto,
-       @User( "userId" ) userId: number
-   ) {
+       @User( "userId" ) userId: number ): Promise<{ message: string }> {
       await this.conversationService.leaveGroupConversation( dto.conversationId, userId, dto.limit );
       return { message: "Success" };
    }

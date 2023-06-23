@@ -5,6 +5,7 @@ import { Request } from "express";
 import { User } from "../common/decorator";
 import { AccessGuard, LoginGuard, RefreshGuard, RegistrationGuard } from "./guard";
 import { RegistrationDto, ResetPasswordDto } from "./dto";
+import { IAccessTokenPair } from "./interface/access-token-pair.interface";
 
 @Controller( "auth" )
 export class AuthController {
@@ -13,36 +14,35 @@ export class AuthController {
 
    @UseGuards( RegistrationGuard )
    @Post( "registration" )
-   async registration( @Body() dto: RegistrationDto ) {
+   async registration( @Body() dto: RegistrationDto ): Promise<{ message: string }> {
       await this.authService.registration( dto );
       return { message: "Success" };
    }
 
    @UseGuards( LoginGuard )
    @Post( "login" )
-   async login( @Req() request: Request & { user: UserModel } ) {
+   async login( @Req() request: Request & { user: UserModel } ): Promise<IAccessTokenPair> {
       return this.authService.login( request.user );
    }
 
    @Post( "forgot_password" )
    async forgotPassword(
        @Req() request: Request,
-       @Body( "email" ) email: string
-   ) {
+       @Body( "email" ) email: string ): Promise<{ message: string }> {
       const clientUrl = request.headers.origin;
       await this.authService.forgotPassword( email, clientUrl );
       return { message: "Success" };
    }
 
    @Patch( "reset_password" )
-   async resetPassword( @Body() dto: ResetPasswordDto ) {
+   async resetPassword( @Body() dto: ResetPasswordDto ): Promise<{ message: string }> {
       await this.authService.resetPassword( dto );
       return { message: "Success" };
    }
 
    @UseGuards( AccessGuard )
    @Delete( "logout" )
-   async logout( @User( "token" ) token: string ) {
+   async logout( @User( "token" ) token: string ): Promise<{ message: string }> {
       await this.authService.logout( token );
       return { message: "Success" };
    }
@@ -50,8 +50,7 @@ export class AuthController {
    @UseGuards( RefreshGuard )
    @Post( "refresh" )
    async refresh(
-       @User() user: { userId: number, refreshToken: string }
-   ) {
+       @User() user: { userId: number, refreshToken: string } ): Promise<IAccessTokenPair> {
       return this.authService.refresh( user.refreshToken, user.userId );
    }
 

@@ -22,8 +22,7 @@ export class MessageController {
    async sendMessage(
        @Body( "content" ) content: string,
        @Param( "conversationId" ) conversationId: number,
-       @User( "userId" ) userId: number
-   ) {
+       @User( "userId" ) userId: number ): Promise<MessageModel> {
       return this.messageService.sendMessage( content, userId, conversationId );
    }
 
@@ -34,8 +33,7 @@ export class MessageController {
    async sendImage(
        @User( "userId" ) userId: number,
        @Param( "conversationId" ) conversationId: number,
-       @UploadedFile() file: Express.Multer.File,
-   ) {
+       @UploadedFile() file: Express.Multer.File ): Promise<MessageModel> {
       return this.messageService.sendImage( file, userId, conversationId );
    }
 
@@ -44,8 +42,7 @@ export class MessageController {
    @Get( ":conversationId" )
    async getMessages(
        @Param( "conversationId" ) conversationId: number,
-       @User( "userId" ) userId: number
-   ) {
+       @User( "userId" ) userId: number ): Promise<MessageModel[]> {
       return this.messageService.getMessages( conversationId, userId );
    }
 
@@ -55,8 +52,7 @@ export class MessageController {
    async deleteMessage(
        @User( "userId" ) userId: number,
        @Param( "conversationId" ) conversationId: number,
-       @Query( "messageId" ) messageId: number
-   ) {
+       @Query( "messageId" ) messageId: number ): Promise<MessageModel> {
       return this.messageService.deleteMessage( conversationId, messageId, userId );
    }
 

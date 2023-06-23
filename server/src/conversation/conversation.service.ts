@@ -5,6 +5,7 @@ import { UserModel } from "../user/model";
 import { Op } from "sequelize";
 import { MessageModel } from "../message/model/message.model";
 import { groupConversationPresenter, privateConversationPresenter } from "./presenter";
+import { IConversationList } from "./interface/conversation.interface";
 
 @Injectable()
 export class ConversationService {
@@ -78,7 +79,7 @@ export class ConversationService {
           } );
    }
 
-   async getConversationsBySearch( currentUserId: number, searchKey: string, limit: number ) {
+   async getConversationsBySearch( currentUserId: number, searchKey: string, limit: number ): Promise<IConversationList> {
       const [ groupConversations, privateConversation ] = await Promise.all( [
 
          this.userModel.findByPk( currentUserId, {
@@ -174,7 +175,7 @@ export class ConversationService {
 
    }
 
-   async getConversations( currentUserId: number, limit: number ) {
+   async getConversations( currentUserId: number, limit: number ): Promise<IConversationList> {
       const conversations = await this.userModel.findByPk( currentUserId, {
          include: {
             model: ConversationModel,
@@ -220,7 +221,7 @@ export class ConversationService {
       };
    }
 
-   async deleteConversation( conversationId: number, currentUserId: number, limit: number ) {
+   async deleteConversation( conversationId: number, currentUserId: number, limit: number ): Promise<IConversationList> {
       const isGroupConversation = await this.conversationModel.findByPk( conversationId ).then( res => Boolean( res?.isGroupConversation === true ) );
       if ( isGroupConversation ) throw new HttpException( "You are not admin. You can not delete group conversation", HttpStatus.UNAUTHORIZED );
 
@@ -282,7 +283,7 @@ export class ConversationService {
       };
    }
 
-   async deleteGroupConversation( conversationId: number, currentUserId: number, limit: number ) {
+   async deleteGroupConversation( conversationId: number, currentUserId: number, limit: number ): Promise<IConversationList> {
       const [ isUserAdmin, isGroupConversation ] = await this.conversationModel
           .findByPk( conversationId )
           .then( res => [
@@ -351,7 +352,7 @@ export class ConversationService {
       };
    }
 
-   async leaveGroupConversation( conversationId: number, currentUserId: number, limit: number ) {
+   async leaveGroupConversation( conversationId: number, currentUserId: number, limit: number ): Promise<IConversationList> {
       const [ isUserAdmin, isGroupConversation ] = await this.conversationModel
           .findByPk( conversationId )
           .then( res => [
@@ -414,7 +415,7 @@ export class ConversationService {
       };
    }
 
-   async kickUserFromGroupConversation( conversationId: number, userId: number ) {
+   async kickUserFromGroupConversation( conversationId: number, userId: number ): Promise<void> {
       await this.conversationUserModel.destroy( { where: { conversationId, userId } } );
    }
 

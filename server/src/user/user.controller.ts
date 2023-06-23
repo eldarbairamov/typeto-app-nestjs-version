@@ -18,14 +18,13 @@ export class UserController {
    @Get()
    async findUser(
        @Query( "userEmail" ) userEmail: string,
-       @User( "userId" ) userId: number
-   ) {
+       @User( "userId" ) userId: number ): Promise<any> {
       return this.userService.findUser( userEmail, userId );
    }
 
    @UseGuards( AccessGuard )
    @Get( "get_current_user" )
-   async getCurrentUser( @User( "userId" ) userId: number ) {
+   async getCurrentUser( @User( "userId" ) userId: number ): Promise<UserModel> {
       return this.userService.getCurrentUser( userId );
    }
 
@@ -34,15 +33,14 @@ export class UserController {
    @Patch( "avatar" )
    async uploadAvatar(
        @User( "userId" ) userId: number,
-       @UploadedFile() file: Express.Multer.File
-   ) {
+       @UploadedFile() file: Express.Multer.File ): Promise<{ imageName: string }> {
       const { imageName } = await this.userService.uploadAvatar( file, userId );
-      return imageName;
+      return { imageName };
    }
 
    @UseGuards( AccessGuard )
    @Delete( "avatar" )
-   async deleteAvatar( @User( "userId" ) userId: number ) {
+   async deleteAvatar( @User( "userId" ) userId: number ): Promise<{ message: string }> {
       await this.userService.deleteAvatar( userId );
       return { message: "Success" };
    }
@@ -51,8 +49,7 @@ export class UserController {
    @Get( "contacts" )
    async getContacts(
        @User( "userId" ) userId: number,
-       @Query( "searchKey" ) searchKey: string
-   ) {
+       @Query( "searchKey" ) searchKey: string ): Promise<UserModel[]> {
       return this.userService.getContacts( searchKey, userId );
    }
 
@@ -60,8 +57,7 @@ export class UserController {
    @Post( "contacts" )
    async addContact(
        @Body( "targetId" ) targetId: number,
-       @User( "userId" ) userId: number
-   ) {
+       @User( "userId" ) userId: number ): Promise<{ message: string }> {
       await this.userService.addContact( targetId, userId );
       return { message: "Success" };
    }
@@ -70,8 +66,7 @@ export class UserController {
    @Delete( "contacts" )
    async deleteContact(
        @Query( "contactId" ) contactId: number,
-       @User( "userId" ) userId: number
-   ) {
+       @User( "userId" ) userId: number ): Promise<UserModel[]> {
       return this.userService.deleteContact( contactId, userId );
    }
 
