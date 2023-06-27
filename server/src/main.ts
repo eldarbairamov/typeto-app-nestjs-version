@@ -19,4 +19,4 @@ const start = async () => {
    await app.listen( 3100 );
 };
 
-start().then( () => console.log( "Database is connected. Server started on port 3100" ) );
+start().then( () => console.log( "Database is connected. Server is started on port 3100" ) );
