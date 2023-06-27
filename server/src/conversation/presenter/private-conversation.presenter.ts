@@ -2,7 +2,6 @@ import { ConversationAttr, ConversationUserAttr } from "../model";
 import { UserModel } from "../../user/model";
 
 export const privateConversationPresenter = ( conversation: ConversationAttr, userId: number ) => {
-
    const { users, ...presentedConversation } = Object.assign(
        {},
        { ...conversation },
@@ -14,10 +13,10 @@ export const privateConversationPresenter = ( conversation: ConversationAttr, us
               .map( ( user ) => {
 
                  const userWithAssociation = user as UserModel & {
-                    ConversationUser: ConversationUserAttr
+                    ConversationUserModel: ConversationUserAttr
                  };
 
-                 if ( userWithAssociation.id === userId ) return userWithAssociation.ConversationUser?.isNewMessagesExist;
+                 if ( userWithAssociation.id === userId ) return userWithAssociation.ConversationUserModel.isNewMessagesExist;
 
                  return null;
 

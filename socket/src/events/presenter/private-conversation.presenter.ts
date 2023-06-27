@@ -10,10 +10,10 @@ export const privateConversationPresenter = ( conversation: ConversationAttr, us
        {
           isNewMessagesExist: conversation.users
               .map( ( user ) => {
-                 const userWithAssociation = user as UserModel & { ConversationUser: ConversationUserAttr };
+                 const userWithAssociation = user as UserModel & { ConversationUserModel: ConversationUserAttr };
 
                  if ( userWithAssociation.id === userId ) {
-                    return userWithAssociation.ConversationUser?.isNewMessagesExist;
+                    return userWithAssociation.ConversationUserModel.isNewMessagesExist;
                  }
 
                  return null;
