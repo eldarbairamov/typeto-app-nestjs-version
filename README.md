@@ -53,3 +53,8 @@
 <p align="center">- Authentication and authorization via JWT<br>- E-Mail service<br>- Find users by email address<br>- Adding a user to your contact list and deleting<br>- Creating private and group conversations<br>- Search the conversation by conversation title or username<br>- Indication when the user is typing<br>- Notifying when a conversation is closed or when you are removed from a group conversation<br>- Indicating new incoming messages<br>- Sending images<br>- Deleting your own messages from the conversation<br>- Saving pre-compressed images to the server, as well as deleting them<br>- "Forgot Password" - reset password<br>- Infinite scroll via Intersection Observer<br>- Theme switcher<br>- Responsive design</p>
 
 ###
+
+<h1 align="center"></h1>
+<h3 align="center">Video preview :</h3>
+
+[<img src="https://i.ytimg.com/vi/Yj49W1MasjY/maxresdefault.jpg" width="100%">](https://youtu.be/Yj49W1MasjY "TypeTo")
