@@ -1,4 +1,4 @@
-<h1 align="center">TypeTo (1.0-beta) | React + Nest.js + Chakra UI</h1>
+<h1 align="center">TypeTo (1.0-beta) | React + Nest.js + Socket.IO + Chakra UI</h1>
 
 ###
 
