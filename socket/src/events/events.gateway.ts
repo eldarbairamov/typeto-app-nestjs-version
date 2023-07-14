@@ -171,8 +171,6 @@ export class EventsGateway implements OnGatewayConnection, OnGatewayDisconnect {
 
       const [ conversationId, whoTypingId ] = data;
 
-      console.log(conversationId);
-
       const { whoTyping, conversationWith } = await this.eventService.typing( conversationId, whoTypingId );
 
       const to = this.sessionManagerService.getUsers( this.users, conversationWith ) as string[];
