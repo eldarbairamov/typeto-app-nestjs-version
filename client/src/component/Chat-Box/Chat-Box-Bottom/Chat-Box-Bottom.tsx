@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 
 import { useAppSelector, useInputHandler } from "../../../hook";
 import { sendMessageService } from "../../../service";
@@ -18,7 +18,13 @@ export function ChatBoxBottom() {
 
    const { whoIsTyping } = useAppSelector( state => state.appReducer );
 
+   const { activeConversation } = useAppSelector( state => state.conversationReducer );
+
    const { TEXT_AREA, PLACEHOLDER_COLOR, MAIN_COLOR, BLACK_COLOR, MAIN_COLOR_SUPER_LIGHT2 } = useColorValues();
+
+   useEffect( () => {
+      setValue( "" );
+   }, [ activeConversation ] );
 
    return (
        <VStack w={ "100%" }

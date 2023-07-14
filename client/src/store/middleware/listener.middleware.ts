@@ -77,6 +77,8 @@ listenerMiddleware.startListening( {
 
       socket.off( "get_message" );
 
+      socket.off('someone_is_typing')
+
       socket.on( "get_message", ( message: IMessage, conversationForSender: IConversation, conversationForReceiver: IConversation ) => {
          // console.log( MAGENTA, "socket: get_message" );
 
@@ -240,6 +242,8 @@ listenerMiddleware.startListening( {
 
       const userIds = action.meta.arg.userIds;
       const conversationWith = userIds.length ? userIds : userIds[0];
+
+      socket.off()
 
       socket.emit( "create_conversation", action.payload.id, userReducer.currentUserInfo.id, conversationWith );
 
