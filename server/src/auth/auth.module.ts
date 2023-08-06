@@ -5,7 +5,7 @@ import { AuthService } from "./auth.service";
 import { ActionTokenModel, OAuthModel } from "./model";
 import { JwtModule } from "@nestjs/jwt";
 import { UserModel } from "../user/model";
-import { EmailService } from "../common/service/email.service";
+import { EmailService } from "../common/service";
 import { ConfigService } from "@nestjs/config";
 import { PassportModule } from "@nestjs/passport";
 import { PasswordService, TokenService } from "./service";

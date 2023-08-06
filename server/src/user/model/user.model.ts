@@ -47,7 +47,7 @@ export class UserModel extends Model<UserAttr, UserCreationAttr> {
       instance.password = await bcrypt
           .hash( instance.password, 8 )
           .catch( () => {
-             throw new HttpException( "JWT: Error", HttpStatus.INTERNAL_SERVER_ERROR );
+             throw new HttpException( "Bcrypt: Error", HttpStatus.INTERNAL_SERVER_ERROR );
           } );
    }
 
