@@ -2,6 +2,7 @@ import { HttpAdapterHost, NestFactory } from "@nestjs/core";
 import { AppModule } from "./app.module";
 import { ValidationPipe, } from "@nestjs/common";
 import { AllExceptionsFilter } from "./common/exception/all-exceptions.filter";
+import configuration from "./config/index";
 
 const start = async () => {
    const app = await NestFactory.create( AppModule );
@@ -16,7 +17,7 @@ const start = async () => {
    app.useGlobalFilters( new AllExceptionsFilter( adapterHost ) );
 
 
-   await app.listen( 3100 );
+   await app.listen( configuration().PORT );
 };
 
-start().then( () => console.log( "Database is connected. Server is started on port 3100" ) );
+start().then( () => console.log( `Database is connected. Server is started on port ${ configuration().PORT }` ) );
