@@ -17,7 +17,6 @@ services:
     depends_on:
       - db
 
-
   db:
     container_name: postgres_db_nestjs
     image: postgres:15.3-alpine
