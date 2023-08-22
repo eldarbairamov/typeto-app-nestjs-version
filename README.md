@@ -35,6 +35,8 @@
   <img width="5" />
   <img src="https://skillicons.dev/icons?i=docker" height="50" alt="docker logo"  />
   <img width="5" />
+  <img src="https://skillicons.dev/icons?i=nginx" height="50" alt="nginx logo"  />
+  <img width="5" />
   <img src="https://cdn.simpleicons.org/socketdotio/010101" height="50" alt="socketio logo"  />
 </div>
 
