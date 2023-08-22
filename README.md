@@ -23,6 +23,8 @@
   <img width="5" />
   <img src="https://skillicons.dev/icons?i=react" height="50" alt="react logo"  />
   <img width="5" />
+  <img src="https://skillicons.dev/icons?i=vite" height="50" alt="vite logo"  />
+  <img width="5" />
   <img src="https://skillicons.dev/icons?i=redux" height="50" alt="redux logo"  />
   <img width="5" />
   <img src="https://skillicons.dev/icons?i=nodejs" height="50" alt="nodejs logo"  />
